@@ -1,0 +1,24 @@
+.nav {
+	max-width: 200px;
+	width: 100%;
+}
+
+.list {
+	margin: 0;
+	padding: 10px;
+	list-style: none;
+}
+
+.item {
+	padding: 5px;
+}
+
+.item:hover {
+	background: #e1e5eb;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.link {
+	color: #285473;
+}

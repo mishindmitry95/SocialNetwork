@@ -1,0 +1,12 @@
+.header {
+	background-color: #4a76a8;
+}
+
+.header img {
+	width: 50px;
+}
+
+.header_content {
+	padding: 5px 10px;
+	box-sizing: border-box;
+}
