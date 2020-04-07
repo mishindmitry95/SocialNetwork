@@ -11,10 +11,14 @@ const App = () => {
 		<BrowserRouter>
 			<div className="app-wrapper">
 				<Header />
-				<div className="main-content fixed-container flex-container">
-					<Navbar />
-					<Route path="/profile" component={Profile} />
-					<Route path="/messages" component={Dialogs} />
+				<div className="main-content fixed-container">
+					<div className="sidebar">
+						<Navbar />
+					</div>
+					<div className="page_body">
+						<Route path="/profile" component={Profile} />
+						<Route path="/messages" component={Dialogs} />
+					</div>
 				</div>
 			</div>
 		</BrowserRouter>
