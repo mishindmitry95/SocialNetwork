@@ -1,0 +1,17 @@
+.Dialog {
+	margin: 0;
+	padding: 3px;
+	text-decoration: none;
+	box-sizing: border-box;
+	border: 3px;
+}
+
+.Dialog:hover {
+	background-color: #ebedf0;
+}
+
+.Link {
+	display: block;
+	text-decoration: none;
+	color: #626d7a;
+}

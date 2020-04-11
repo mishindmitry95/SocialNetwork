@@ -1,4 +1,4 @@
-.DialogsContainer {
+.ContentContainer {
 	display: grid;
 	padding: 10px;
 	border: 1px solid transparent;
@@ -9,28 +9,6 @@
 	box-shadow: 0 0 0 1px #e3e4e8;
 }
 
-.Dialogs {
-	list-style: none;
-	margin: 0;
-	padding: 3px;
-}
-
-.Link {
-	text-decoration: none;
-	color: #000;
-}
-
-.Link:hover {
-	color: #656565;
-}
-
 .active {
 	color: #285473;
-}
-
-.Messages {
-	list-style: none;
-	margin: 0;
-	padding: 3px;
-	color: #656565;
 }
