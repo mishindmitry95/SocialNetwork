@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import { profilePage } from "./profilePage";
-import { dialogsPage } from "./dialogsPage";
+import { profilePageReducer } from "./profilePageReducer";
+import { dialogsPageReducer } from "./dialogsPageReducer";
+import { usersPageReducer } from "./usersPageReducer";
 
 export const rootReducer = combineReducers({
-	profilePage,
-	dialogsPage
+	profilePage: profilePageReducer,
+	dialogsPage: dialogsPageReducer,
+	usersPage: usersPageReducer,
 })

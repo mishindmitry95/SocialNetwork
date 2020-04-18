@@ -17,8 +17,7 @@ const initialState = {
 	]
 }
 
-export const dialogsPage = (state = initialState, action) => {
-	debugger;
+export const dialogsPageReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case SEND_MESSAGE:
 			return {

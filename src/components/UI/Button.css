@@ -22,3 +22,16 @@
 .button_theme_default {
 	background-color: #5181b8;
 }
+
+.button_theme_success {
+	background-color: #28a745;
+}
+
+.button_theme_danger {
+	background-color: #dc3545;
+}
+
+.button_theme_info {
+	background-color: #17a2b8;
+}
+
