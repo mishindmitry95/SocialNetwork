@@ -18,17 +18,16 @@ const initialState = {
 }
 
 export const dialogsPage = (state = initialState, action) => {
+	debugger;
 	switch (action.type) {
 		case SEND_MESSAGE:
-			return Object.assign({}, state, {
-				messages: [
-					...state.messages,
-					{
-						id: state.messages[state.messages.length - 1].id++,
-						message: action.message,
-					}
-				]
-			})
+			return {
+				...state,
+				messages: [...state.messages, {
+					id: state.messages[state.messages.length - 1].id++,
+					message: action.text,
+				}]
+			}
 		default:
 			return state
 	}

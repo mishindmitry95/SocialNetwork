@@ -6,7 +6,9 @@ import MessagesList from "./MessagesList/MessagesList";
 const Dialogs = (props) => {
 	return (
 		<div className={Classes.ContentContainer}>
-			<DialogsList dialogs={ props.dialogs } />
+			<DialogsList
+				dialogs={ props.dialogs }
+			/>
 			<MessagesList
 				messages={ props.messages }
 				onSendMessage={ props.sendMessage }
