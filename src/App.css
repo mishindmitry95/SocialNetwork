@@ -23,3 +23,10 @@
 .sidebar {
 	grid-area: sidebar;
 }
+
+.textarea {
+	display: block;
+	margin-bottom: 3px;
+	border: 1px solid #d3d9de;
+	box-sizing: border-box;
+}

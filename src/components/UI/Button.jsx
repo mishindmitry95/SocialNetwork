@@ -5,6 +5,7 @@ const Button = (props) => {
 	return (
 		<button
 			className={`button button_theme_${props.theme}`}
+			onClick={props.onClick}
 		>
 			{props.caption}
 		</button>

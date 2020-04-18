@@ -7,7 +7,10 @@ const Dialogs = (props) => {
 	return (
 		<div className={Classes.ContentContainer}>
 			<DialogsList dialogs={ props.dialogs } />
-			<MessagesList dialogs={ props.dialogs } />
+			<MessagesList
+				messages={ props.messages }
+				onSendMessage={ props.sendMessage }
+			/>
 		</div>
 	);
 }

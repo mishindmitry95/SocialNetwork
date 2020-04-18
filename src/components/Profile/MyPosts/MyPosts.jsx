@@ -1,18 +1,25 @@
 import React from 'react';
-import Classes from './MyPosts.module.css'
 import Post from './Post/Post'
-import Button from "../../UI/Button";
+import AddPost from "../../../containers/AddPost/AddPost";
 
 const MyPosts = (props) => {
-	let postElements = props.posts.map(p => <Post avatar={p.avatar} text={p.text} likes={p.likes}/>)
+	const postElements = props.posts.map(p => {
+		return (
+			<Post
+				avatar={ p.avatar }
+				text= {p.text }
+				likes={ p.likes }
+				key={ p.id }
+			/>
+		);
+	})
+
 	return (
 		<div>
 			<h2>My posts</h2>
 			<div>
-				<textarea className={Classes.textareaField}></textarea>
-				<Button
-					caption='Добавить пост'
-					theme='default'
+				<AddPost
+					onAddPost={props.addPost}
 				/>
 			</div>
 			{ postElements }

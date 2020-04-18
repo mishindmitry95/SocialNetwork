@@ -1,18 +1,20 @@
 import React from "react";
 import Classes from "./MessagesList.module.css";
 import Message from "./Message/Message";
+import SendMessage from "../../../containers/SendMessage/SendMessage";
 
 const MessagesList = (props) => {
-	let messageElements = props.dialogs.map( d => {
-		return d.messages.map( m => {
-			return <Message text={ m }/>
-		})
+	const messageElements = props.messages.map( m => {
+		return <Message text={ m.message } key={m.id}/>
 	})
 
 	return (
-		<ul className={Classes.MessagesList}>
-			{ messageElements }
-		</ul>
+		<div>
+			<ul className={Classes.MessagesList}>
+				{ messageElements }
+			</ul>
+			<SendMessage onSendMessage={ props.onSendMessage }/>
+		</div>
 	);
 }
 
