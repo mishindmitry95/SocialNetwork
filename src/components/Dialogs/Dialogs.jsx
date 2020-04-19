@@ -1,11 +1,11 @@
 import React from "react";
-import Classes from './Dialogs.module.css'
+import Styles from './Dialogs.module.css'
 import DialogsList from "./DialogsList/DialogsList";
 import MessagesList from "./MessagesList/MessagesList";
 
 const Dialogs = (props) => {
 	return (
-		<div className={Classes.ContentContainer}>
+		<div className={Styles.ContentContainer}>
 			<DialogsList
 				dialogs={ props.dialogs }
 			/>

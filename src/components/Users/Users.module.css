@@ -7,3 +7,9 @@
 	margin-top: 5px;
 	text-align: center;
 }
+
+.PagesContainer {
+	display: flex;
+	margin-bottom: 10px;
+	justify-content: center;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import Classes from "./MessagesList.module.css";
+import Styles from "./MessagesList.module.css";
 import Message from "./Message/Message";
 import SendMessage from "../../../containers/SendMessage/SendMessage";
 
@@ -10,7 +10,7 @@ const MessagesList = (props) => {
 
 	return (
 		<div>
-			<ul className={Classes.MessagesList}>
+			<ul className={Styles.MessagesList}>
 				{ messageElements }
 			</ul>
 			<SendMessage onSendMessage={ props.onSendMessage }/>

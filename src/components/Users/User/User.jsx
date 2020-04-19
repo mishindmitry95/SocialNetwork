@@ -1,36 +1,47 @@
 import React from "react";
-import Classes from './User.module.css'
-import {FollowUnfollow} from "../../../containers/FollowUnfollow/FollowUnfollow";
+import Styles from './User.module.css'
+import Button from "../../UI/Button";
 
-export const User = (props) => {
-	return (
-		<div className={Classes.mainContainer}>
-			<div className={Classes.leftContainer}>
-				<img
-					src={props.avatar}
-					alt='user_photo'
-					className={Classes.userPhoto}
-				/>
-				<FollowUnfollow
-					caption={props.isFollow ? 'Unfollow' : 'Follow'}
-					theme={props.isFollow ? 'danger' : 'success'}
-					onClick={props.isFollow ? props.unfollow : props.follow}
-					userId={props.id}
-				/>
-			</div>
-			<div className={Classes.mainContent}>
-				<div className={Classes.mainContentTop}>
-					<div className={Classes.userFullName}>
-						{ `${props.name} ${props.surname}` }
+export class User extends React.Component {
+	constructor(props) {
+		super(props);
+		this.defaultUserAvatar = 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn4.iconfinder.com%2Fdata%2Ficons%2Fuser-avatar-flat-icons%2F512%2FUser_Avatar-04-512.png&f=1&nofb=1';
+	}
+	onFollowUnfollowHandler = (id) => {
+		if (this.props.followed) return this.props.unfollow(id);
+		return this.props.follow(id)
+	}
+
+	render() {
+		const { props } = this;
+
+		return (
+			<div className={Styles.mainContainer}>
+				<div className={Styles.leftContainer}>
+					<img
+						src={props.photo ? props.photo : this.defaultUserAvatar}
+						alt='user_photo'
+						className={Styles.userPhoto}
+					/>
+					<Button
+						caption={props.followed ? 'Unfollow' : 'Follow'}
+						theme={props.followed ? 'danger' : 'success'}
+						onClick={() => {
+							this.onFollowUnfollowHandler(props.id)
+						}}
+					/>
+				</div>
+				<div className={Styles.mainContent}>
+					<div className={Styles.mainContentTop}>
+						<div className={Styles.userFullName}>
+							{ props.name }
+						</div>
 					</div>
-					<div className={Classes.userLocation}>
-						{ `${props.country}, ${props.city}` }
+					<div className={Styles.userStatus}>
+						{ props.status }
 					</div>
 				</div>
-				<div className={Classes.userStatus}>
-					{ props.status }
-				</div>
 			</div>
-		</div>
-	);
+		);
+	}
 }

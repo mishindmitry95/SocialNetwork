@@ -1,17 +1,10 @@
-import { FOLLOW, UNFOLLOW } from '../actions/actions';
+import {FOLLOW, SET_CURRENT_PAGE, SET_USERS, SET_USERS_NUMBER, UNFOLLOW} from '../actions/actions';
 
 const initialState = {
-	users: [
-		{
-			id: 1,
-			name: 'John',
-			surname: 'Dow',
-			userAvatar: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn4.iconfinder.com%2Fdata%2Ficons%2Fuser-avatar-flat-icons%2F512%2FUser_Avatar-04-512.png&f=1&nofb=1',
-			isFollow: true,
-			status: 'Life is a good thing',
-			location: {country: 'Russia', city: 'Moscow'},
-		}
-	]
+	users: [],
+	currentPage: 1,
+	count: 5,
+	usersNumber: 0
 }
 
 export const usersPageReducer = (state = initialState, action) => {
@@ -23,7 +16,7 @@ export const usersPageReducer = (state = initialState, action) => {
 					if (user.id === action.userId) {
 						return {
 							...user,
-							isFollow: true
+							followed: true
 						}
 					}
 					return user;
@@ -35,10 +28,31 @@ export const usersPageReducer = (state = initialState, action) => {
 				...state,
 				users: state.users.map(user => {
 					if (user.id === action.userId) {
-						return {...user, isFollow: false}
+						return {
+							...user,
+							followed: false
+						}
 					}
 					return user;
 				})
+			}
+
+		case SET_USERS:
+			return {
+				...state,
+				users: action.users
+			}
+
+		case SET_CURRENT_PAGE:
+			return {
+				...state,
+				currentPage: action.currentPage
+			}
+
+		case SET_USERS_NUMBER:
+			return {
+				...state,
+				usersNumber: action.usersNumber
 			}
 
 		default:
