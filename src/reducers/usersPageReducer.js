@@ -1,10 +1,11 @@
-import {FOLLOW, SET_CURRENT_PAGE, SET_USERS, SET_USERS_NUMBER, UNFOLLOW} from '../actions/actions';
+import {FOLLOW, SET_CURRENT_PAGE, SET_USERS, SET_USERS_NUMBER, TOGGLE_FETCHING, UNFOLLOW} from '../actions/actions';
 
 const initialState = {
 	users: [],
 	currentPage: 1,
 	count: 5,
-	usersNumber: 0
+	usersNumber: 0,
+	isFetching: true
 }
 
 export const usersPageReducer = (state = initialState, action) => {
@@ -53,6 +54,12 @@ export const usersPageReducer = (state = initialState, action) => {
 			return {
 				...state,
 				usersNumber: action.usersNumber
+			}
+
+		case TOGGLE_FETCHING:
+			return {
+				...state,
+				isFetching: action.isFetching
 			}
 
 		default:

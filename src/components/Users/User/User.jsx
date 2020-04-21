@@ -1,6 +1,6 @@
 import React from "react";
 import Styles from './User.module.css'
-import Button from "../../UI/Button";
+import Button from "../../UI/Button/Button";
 
 export class User extends React.Component {
 	constructor(props) {

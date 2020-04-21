@@ -6,6 +6,7 @@ export const UNFOLLOW = 'UNFOLLOW';
 export const SET_USERS = 'SET_USERS';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const SET_USERS_NUMBER = 'SET_USERS_NUMBER';
+export const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 
 //action creators
 export const addPost = text => {
@@ -54,5 +55,12 @@ export const setUsersNumber = (usersNumber) => {
 	return {
 		type: SET_USERS_NUMBER,
 		usersNumber
+	}
+}
+
+export const toggleFetching = (isFetching) => {
+	return {
+		type: TOGGLE_FETCHING,
+		isFetching
 	}
 }
