@@ -7,6 +7,7 @@ export const SET_USERS = 'SET_USERS';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const SET_USERS_NUMBER = 'SET_USERS_NUMBER';
 export const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
+export const SET_USER_PROFILE = 'SET_USER_PROFILE'
 
 //action creators
 export const addPost = text => {
@@ -62,5 +63,12 @@ export const toggleFetching = (isFetching) => {
 	return {
 		type: TOGGLE_FETCHING,
 		isFetching
+	}
+}
+
+export const setUserProfile = (profile) => {
+	return {
+		type: SET_USER_PROFILE,
+		profile
 	}
 }

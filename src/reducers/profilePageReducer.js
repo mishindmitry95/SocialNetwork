@@ -1,4 +1,4 @@
-import {ADD_POST} from '../actions/actions';
+import {ADD_POST, SET_USER_PROFILE, TOGGLE_FETCHING} from '../actions/actions';
 
 const initialState = {
 	posts: [
@@ -14,7 +14,9 @@ const initialState = {
 			text: 'Today is a good day',
 			likes: 5
 		}
-	]
+	],
+	profile: null,
+	isFetching: true
 }
 
 export const profilePageReducer = (state = initialState, action) => {
@@ -29,6 +31,19 @@ export const profilePageReducer = (state = initialState, action) => {
 					likes: 0
 				}]
 			}
+
+		case SET_USER_PROFILE:
+			return {
+				...state,
+				profile: action.profile
+			}
+
+		case TOGGLE_FETCHING:
+			return {
+				...state,
+				isFetching: action.isFetching
+			}
+
 		default:
 			return state
 	}

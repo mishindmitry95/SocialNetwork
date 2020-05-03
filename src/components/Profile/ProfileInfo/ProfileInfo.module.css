@@ -1,6 +1,27 @@
-.content {
+.innerContainer {
+	display: flex;
+	justify-content: space-between;
 	padding: 5px;
 	background-color: #fff;
 	box-sizing: border-box;
 	box-shadow: 0 0 0 1px #e3e4e8;
+	white-space: nowrap;
+}
+
+.imageContainer {
+	max-width: 30%;
+	width: 100%;
+	min-width: 250px;
+}
+
+.contentContainer {
+	max-width: 65%;
+	width: 100%;
+}
+
+.fullName {
+	font-size: 19px;
+	line-height: 25px;
+	font-weight: 400;
+	color: #000;
 }

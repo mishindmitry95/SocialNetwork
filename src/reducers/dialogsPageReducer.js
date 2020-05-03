@@ -1,13 +1,7 @@
 import { SEND_MESSAGE } from '../actions/actions';
 
 const initialState = {
-	dialogs: [
-		{id: 1, name: 'Oleg'},
-		{id: 2, name: 'Pavel'},
-		{id: 3, name: 'Dmitry'},
-		{id: 4, name: 'Ksenia'},
-		{id: 5, name: 'Fedor'},
-	],
+	dialogs: [],
 	messages: [
 		{id: 1, message: 'hello'},
 		{id: 2, message: 'how are u?'},

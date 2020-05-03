@@ -10,6 +10,8 @@ import * as serviceWorker from './serviceWorker';
 
 const store = createStore(rootReducer);
 
+window.store = store;
+
 ReactDOM.render(
   <BrowserRouter>
 	  <Provider store={store}>
