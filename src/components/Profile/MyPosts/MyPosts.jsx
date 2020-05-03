@@ -20,6 +20,8 @@ const MyPosts = (props) => {
 			<div>
 				<AddPost
 					onAddPost={props.addPost}
+					onUpdateNewPostText={props.updateNewPostText}
+					newPostText={props.newPostText}
 				/>
 			</div>
 			{ postElements }

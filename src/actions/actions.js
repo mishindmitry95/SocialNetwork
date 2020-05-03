@@ -7,12 +7,28 @@ export const SET_USERS = 'SET_USERS';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const SET_USERS_NUMBER = 'SET_USERS_NUMBER';
 export const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
-export const SET_USER_PROFILE = 'SET_USER_PROFILE'
+export const SET_USER_PROFILE = 'SET_USER_PROFILE';
+export const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
+export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 
 //action creators
 export const addPost = text => {
 	return {
 		type: ADD_POST,
+		text
+	}
+}
+
+export const updateNewPostText = text => {
+	return {
+		type: UPDATE_NEW_POST_TEXT,
+		text
+	}
+}
+
+export const updateNewMessageText = text => {
+	return {
+		type: UPDATE_NEW_MESSAGE_TEXT,
 		text
 	}
 }

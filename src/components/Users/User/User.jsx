@@ -12,7 +12,6 @@ export class User extends React.Component {
 		if (this.props.followed) return this.props.unfollow(id);
 		return this.props.follow(id)
 	}
-
 	render() {
 		const { props } = this;
 

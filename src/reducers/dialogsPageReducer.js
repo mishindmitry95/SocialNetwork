@@ -1,4 +1,4 @@
-import { SEND_MESSAGE } from '../actions/actions';
+import {SEND_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from '../actions/actions';
 
 const initialState = {
 	dialogs: [],
@@ -8,7 +8,8 @@ const initialState = {
 		{id: 3, message: 'fine, u?'},
 		{id: 4, message: 'too'},
 		{id: 5, message: 'good'},
-	]
+	],
+	newMessageText: ''
 }
 
 export const dialogsPageReducer = (state = initialState, action) => {
@@ -21,6 +22,13 @@ export const dialogsPageReducer = (state = initialState, action) => {
 					message: action.text,
 				}]
 			}
+
+		case UPDATE_NEW_MESSAGE_TEXT:
+			return {
+				...state,
+				newMessageText: action.text
+			}
+
 		default:
 			return state
 	}

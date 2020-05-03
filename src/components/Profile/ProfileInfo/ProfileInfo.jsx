@@ -13,7 +13,7 @@ const ProfileInfo = (props) => {
 						width: '250px',
 						height: '300px'
 					}}
-					alt='profile-photo'
+					alt='profile_photo'
 				/>
 			</div>
 			<div className={Styles.contentContainer}>

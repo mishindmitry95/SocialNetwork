@@ -6,15 +6,19 @@ const SendMessage = (props) => {
 	return (
 		<div>
 			<textarea
+				value={props.newMessageText}
 				className="textarea"
 				ref={textRef}
+				onChange={() => {
+					props.onUpdateNewMessageText(textRef.current.value)
+				}}
 			/>
 			<Button
 				caption='Отправить сообщение'
 				theme='default'
 				onClick={() => {
 					props.onSendMessage(textRef.current.value);
-					textRef.current.value = '';
+					props.onUpdateNewMessageText('');
 				}}
 			/>
 		</div>

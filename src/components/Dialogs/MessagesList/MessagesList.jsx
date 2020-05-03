@@ -5,7 +5,7 @@ import SendMessage from "../../../containers/SendMessage/SendMessage";
 
 const MessagesList = (props) => {
 	const messageElements = props.messages.map( m => {
-		return <Message text={ m.message } key={m.id}/>
+		return <Message text={ m.message } key={ m.id }/>
 	})
 
 	return (
@@ -13,7 +13,11 @@ const MessagesList = (props) => {
 			<ul className={Styles.MessagesList}>
 				{ messageElements }
 			</ul>
-			<SendMessage onSendMessage={ props.onSendMessage }/>
+			<SendMessage
+				onSendMessage={ props.onSendMessage }
+				onUpdateNewMessageText={ props.onUpdateNewMessageText }
+				newMessageText={ props.newMessageText }
+			/>
 		</div>
 	);
 }
