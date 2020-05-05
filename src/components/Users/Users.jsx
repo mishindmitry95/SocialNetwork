@@ -3,7 +3,6 @@ import {User} from "./User/User";
 import Button from "../UI/Button/Button";
 import Styles from './Users.module.css'
 import {Page} from "../../containers/Page/Page";
-import Preloader from "../UI/Preloader/Preloader";
 
 export const Users = (props) => {
 	const userElements = props.users.map(user => {
@@ -17,6 +16,9 @@ export const Users = (props) => {
 				key={user.id}
 				follow={props.follow}
 				unfollow={props.unfollow}
+				followingInProgress={props.followingInProgress}
+				toggleFollowingProgress={props.toggleFollowingProgress}
+				buttonDisable={props.followingInProgress.some(id => id === user.id)}
 			/>
 		);
 	});
@@ -27,9 +29,12 @@ export const Users = (props) => {
 				key={page}
 				page={page}
 				setCurrentPage={props.setCurrentPage}
+				setUsersNumber={props.setUsersNumber}
+				setUsers={props.setUsers}
 				getNewUsers={props.getNewUsers}
 				selected={ page === props.currentPage }
 				toggleFetching={props.toggleFetching}
+				count={props.count}
 			/>
 		)
 	});
@@ -37,10 +42,10 @@ export const Users = (props) => {
 	return (
 		<div className={Styles.usersContainer}>
 			<div className={Styles.PagesContainer}>
-				{ props.isFetching ? null : pageElements }
+				{ pageElements }
 			</div>
 			<div>
-				{ props.isFetching ? <Preloader /> :  userElements }
+				{ userElements }
 			</div>
 			<div className={Styles.buttonContainer}>
 				<Button

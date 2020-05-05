@@ -1,11 +1,20 @@
-import {FOLLOW, SET_CURRENT_PAGE, SET_USERS, SET_USERS_NUMBER, TOGGLE_FETCHING, UNFOLLOW} from '../actions/actions';
+import {
+	FOLLOW,
+	SET_CURRENT_PAGE,
+	SET_USERS,
+	SET_USERS_NUMBER,
+	TOGGLE_FETCHING,
+	TOGGLE_FOLLOWING_PROGRESS,
+	UNFOLLOW
+} from '../actions/actions';
 
 const initialState = {
 	users: [],
 	currentPage: 1,
 	count: 5,
 	usersNumber: 0,
-	isFetching: true
+	isFetching: true,
+	followingInProgress: []
 }
 
 export const usersPageReducer = (state = initialState, action) => {
@@ -21,7 +30,7 @@ export const usersPageReducer = (state = initialState, action) => {
 						}
 					}
 					return user;
-				})
+				}),
 			}
 
 		case UNFOLLOW:
@@ -35,7 +44,7 @@ export const usersPageReducer = (state = initialState, action) => {
 						}
 					}
 					return user;
-				})
+				}),
 			}
 
 		case SET_USERS:
@@ -60,6 +69,14 @@ export const usersPageReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isFetching: action.isFetching
+			}
+
+		case TOGGLE_FOLLOWING_PROGRESS:
+			return {
+				...state,
+				followingInProgress: action.isFetching
+					? [...state.followingInProgress, action.userId]
+					: state.followingInProgress.filter(id => id !== action.userId)
 			}
 
 		default:

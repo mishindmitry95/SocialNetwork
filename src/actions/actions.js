@@ -10,6 +10,9 @@ export const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 export const SET_USER_PROFILE = 'SET_USER_PROFILE';
 export const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
 export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
+export const SET_USER_DATA = 'SET_USER_DATA';
+export const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS';
+
 
 //action creators
 export const addPost = text => {
@@ -86,5 +89,20 @@ export const setUserProfile = (profile) => {
 	return {
 		type: SET_USER_PROFILE,
 		profile
+	}
+}
+
+export const setUserData = (data) => {
+	return {
+		type: SET_USER_DATA,
+		data
+	}
+}
+
+export const toggleFollowingProgress = (isFetching, userId) => {
+	return {
+		type: TOGGLE_FOLLOWING_PROGRESS,
+		isFetching,
+		userId,
 	}
 }

@@ -1,34 +1,24 @@
 import React from "react";
-import {connect} from "react-redux";
-import {setUserProfile, toggleFetching} from "../../actions/actions";
+import { connect } from "react-redux";
+import { setUserProfile, toggleFetching } from "../../actions/actions";
 import Profile from "../../components/Profile/Profile";
-import {withRouter} from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import Preloader from "../../components/UI/Preloader/Preloader";
+import { userAPI } from "../../api/api";
 
 class ProfileContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.profileUrl = 'https://social-network.samuraijs.com/api/1.0/profile';
         this.profileId = this.props.match.params.userId || null;
     }
 
     componentDidMount() {
-        this.fetchProfile(this.profileId);
-    }
-
-    fetchProfile = async (profileId) => {
-        try {
-            const response = await fetch(`${this.profileUrl}/${profileId}`,
-                {method: 'GET'});
-            const getData = response.json();
-
-            getData.then(data => {
+        userAPI.getProfile(this.profileId)
+            .then(data => {
                 this.props.setUserProfile(data)
                 this.props.toggleFetching(false);
             })
-        } catch (e) {
-            console.error(e);
-        }
+            .catch(e => console.error(e));
     }
 
     render() {

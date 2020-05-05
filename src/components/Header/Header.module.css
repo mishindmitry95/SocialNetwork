@@ -7,6 +7,29 @@
 }
 
 .header_content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	padding: 5px 10px;
 	box-sizing: border-box;
+}
+
+.authContainer {
+	width: 100px;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	padding: 0 10px;
+	color: #fff;
+	font-weight: 700;
+}
+
+.link {
+	color: #fff;
+	font-weight: 700;
+	text-decoration: none;
+}
+
+.link:hover {
+	color: #edeef0;
 }

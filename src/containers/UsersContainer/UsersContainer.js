@@ -1,31 +1,26 @@
 import React from "react";
 import { connect } from "react-redux";
-import { follow, setCurrentPage, setUsers, setUsersNumber, toggleFetching, unfollow } from "../../actions/actions";
+import {
+	follow,
+	setCurrentPage,
+	setUsers,
+	setUsersNumber,
+	toggleFetching,
+	toggleFollowingProgress,
+	unfollow
+} from "../../actions/actions";
 import { Users } from "../../components/Users/Users";
+import { userAPI } from "../../api/api";
+import Preloader from "../../components/UI/Preloader/Preloader";
 
 class UsersContainer extends React.Component {
-	constructor(props) {
-		super(props);
-		this.userUrl = 'https://social-network.samuraijs.com/api/1.0/users';
-	}
 	componentDidMount() {
-		this.fetchUsers(this.props.currentPage);
-	}
-
-	fetchUsers = async (page) => {
-		try {
-			const response = await fetch(`${this.userUrl}?page=${page}&count=${this.props.count}`,
-				{method: 'GET'});
-			const getData = response.json();
-
-			getData.then(data => {
+		userAPI.getUsers(this.props.currentPage, this.props.count)
+			.then(data => {
 				this.props.setUsers(data.items);
 				this.props.setUsersNumber(data.totalCount)
 				this.props.toggleFetching(false);
-			})
-		} catch (e) {
-			console.error(e);
-		}
+			}).catch(e => console.error(e));
 	}
 
 	get pages() {
@@ -40,6 +35,7 @@ class UsersContainer extends React.Component {
 	}
 
 	render() {
+		if (this.props.isFetching) return <Preloader />
 		return (
 			<Users
 				usersNumber={this.props.usersNumber}
@@ -50,9 +46,12 @@ class UsersContainer extends React.Component {
 				unfollow={this.props.unfollow}
 				isFetching={this.props.isFetching}
 				pages={this.pages}
-				getNewUsers={this.fetchUsers}
 				toggleFetching={this.props.toggleFetching}
 				setCurrentPage={this.props.setCurrentPage}
+				setUsers={this.props.setUsers}
+				setUsersNumber={this.props.setUsersNumber}
+				followingInProgress={this.props.followingInProgress}
+				toggleFollowingProgress={this.props.toggleFollowingProgress}
 			/>
 		);
 	}
@@ -63,7 +62,8 @@ const mapStateToProps = state => ({
 	count: state.usersPage.count,
 	currentPage: state.usersPage.currentPage,
 	usersNumber: state.usersPage.usersNumber,
-	isFetching: state.usersPage.isFetching
+	isFetching: state.usersPage.isFetching,
+	followingInProgress: state.usersPage.followingInProgress
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -72,7 +72,8 @@ const mapDispatchToProps = dispatch => ({
 	setUsers: (users) => dispatch(setUsers(users)),
 	setCurrentPage: (currentPage) => dispatch(setCurrentPage(currentPage)),
 	setUsersNumber: (usersNumber) => dispatch(setUsersNumber(usersNumber)),
-	toggleFetching: (isFetching) => dispatch(toggleFetching(isFetching))
+	toggleFetching: (isFetching) => dispatch(toggleFetching(isFetching)),
+	toggleFollowingProgress: (isFetching, userId) => dispatch(toggleFollowingProgress(isFetching, userId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
