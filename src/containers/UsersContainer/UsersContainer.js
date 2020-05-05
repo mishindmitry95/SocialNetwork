@@ -6,8 +6,7 @@ import {
 	setUsers,
 	setUsersNumber,
 	toggleFetching,
-	toggleFollowingProgress,
-	unfollow
+	toggleFollowingProgress, unfollow,
 } from "../../actions/actions";
 import { Users } from "../../components/Users/Users";
 import { userAPI } from "../../api/api";
@@ -15,12 +14,7 @@ import Preloader from "../../components/UI/Preloader/Preloader";
 
 class UsersContainer extends React.Component {
 	componentDidMount() {
-		userAPI.getUsers(this.props.currentPage, this.props.count)
-			.then(data => {
-				this.props.setUsers(data.items);
-				this.props.setUsersNumber(data.totalCount)
-				this.props.toggleFetching(false);
-			}).catch(e => console.error(e));
+		this.props.getUsers(this.props.currentPage, this.props.count);
 	}
 
 	get pages() {
@@ -42,8 +36,7 @@ class UsersContainer extends React.Component {
 				count={this.props.count}
 				currentPage={this.props.currentPage}
 				users={this.props.users}
-				follow={this.props.follow}
-				unfollow={this.props.unfollow}
+				followUnfollow={this.props.followUnfollow}
 				isFetching={this.props.isFetching}
 				pages={this.pages}
 				toggleFetching={this.props.toggleFetching}
@@ -52,6 +45,7 @@ class UsersContainer extends React.Component {
 				setUsersNumber={this.props.setUsersNumber}
 				followingInProgress={this.props.followingInProgress}
 				toggleFollowingProgress={this.props.toggleFollowingProgress}
+				getUsers={this.props.getUsers}
 			/>
 		);
 	}
@@ -66,14 +60,32 @@ const mapStateToProps = state => ({
 	followingInProgress: state.usersPage.followingInProgress
 })
 
-const mapDispatchToProps = dispatch => ({
-	follow: (userId) => dispatch(follow(userId)),
-	unfollow: (userId) => dispatch(unfollow(userId)),
-	setUsers: (users) => dispatch(setUsers(users)),
-	setCurrentPage: (currentPage) => dispatch(setCurrentPage(currentPage)),
-	setUsersNumber: (usersNumber) => dispatch(setUsersNumber(usersNumber)),
-	toggleFetching: (isFetching) => dispatch(toggleFetching(isFetching)),
-	toggleFollowingProgress: (isFetching, userId) => dispatch(toggleFollowingProgress(isFetching, userId))
-})
+const getUsers = (page, count) => (dispatch) => {
+	dispatch(toggleFetching(true));
+	userAPI.getUsers(page, count)
+		.then(data => {
+			dispatch(setUsers(data.items));
+			dispatch(setUsersNumber(data.totalCount));
+			dispatch(setCurrentPage(page));
+			dispatch(toggleFetching(false));
+		}).catch(e => console.error(e));
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+const followUnfollow = (id, followed) => (dispatch) => {
+	dispatch(toggleFollowingProgress(true, id));
+	if (followed) {
+		return userAPI.userUnfollow(id)
+			.then(() => {
+				dispatch(unfollow(id));
+				dispatch(toggleFollowingProgress(false, id));
+			}).catch(e => console.error(e));
+	}
+	return userAPI.userFollow(id)
+		.then(() => {
+			dispatch(follow(id));
+			dispatch(toggleFollowingProgress(false, id));
+		}).catch(e => console.error(e));
+}
+
+
+export default connect(mapStateToProps, { getUsers, followUnfollow })(UsersContainer);

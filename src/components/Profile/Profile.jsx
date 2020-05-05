@@ -4,7 +4,7 @@ import MyPostsContainer from "../../containers/MyPostsContainer/MyPostsContainer
 import Preloader from "../UI/Preloader/Preloader";
 
 const Profile = (props) => {
-	if (!props.profile) return <Preloader />;
+	if (!props.profile) return <Preloader />
 	return (
 		<div>
 			<ProfileInfo

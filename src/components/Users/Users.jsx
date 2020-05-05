@@ -14,10 +14,7 @@ export const Users = (props) => {
 				photo={user.photos.small}
 				followed={user.followed}
 				key={user.id}
-				follow={props.follow}
-				unfollow={props.unfollow}
-				followingInProgress={props.followingInProgress}
-				toggleFollowingProgress={props.toggleFollowingProgress}
+				followUnfollow={props.followUnfollow}
 				buttonDisable={props.followingInProgress.some(id => id === user.id)}
 			/>
 		);
@@ -28,12 +25,8 @@ export const Users = (props) => {
 			<Page
 				key={page}
 				page={page}
-				setCurrentPage={props.setCurrentPage}
-				setUsersNumber={props.setUsersNumber}
-				setUsers={props.setUsers}
-				getNewUsers={props.getNewUsers}
+				getUsers={props.getUsers}
 				selected={ page === props.currentPage }
-				toggleFetching={props.toggleFetching}
 				count={props.count}
 			/>
 		)

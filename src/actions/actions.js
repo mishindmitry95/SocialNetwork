@@ -10,7 +10,7 @@ export const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 export const SET_USER_PROFILE = 'SET_USER_PROFILE';
 export const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
 export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
-export const SET_USER_DATA = 'SET_USER_DATA';
+export const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA';
 export const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS';
 
 
@@ -92,9 +92,9 @@ export const setUserProfile = (profile) => {
 	}
 }
 
-export const setUserData = (data) => {
+export const setAuthUserData = (data) => {
 	return {
-		type: SET_USER_DATA,
+		type: SET_AUTH_USER_DATA,
 		data
 	}
 }
