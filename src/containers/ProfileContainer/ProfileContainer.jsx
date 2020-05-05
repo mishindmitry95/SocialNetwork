@@ -5,6 +5,8 @@ import Profile from "../../components/Profile/Profile";
 import { withRouter } from "react-router-dom";
 import { userAPI } from "../../api/api";
 import Preloader from "../../components/UI/Preloader/Preloader";
+import { compose } from "redux";
+import { withAuthRedirect } from "../../reducers/withAuthRedirect";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -40,6 +42,9 @@ const getUserProfile = (id) => (dispatch) => {
         })
         .catch(e => console.error(e));
 }
-const WithUrlDataContainerComponent = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, { getUserProfile })(WithUrlDataContainerComponent);
+export default compose(
+    connect(mapStateToProps, { getUserProfile }),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)
