@@ -15,6 +15,8 @@ const Profile = (props) => {
 				lookingForAJobDescription={props.profile.lookingForAJobDescription}
 				photo={props.profile.photos.large}
 				userId={props.profile.userId}
+				updateStatus={props.updateUserStatus}
+				status={props.status}
 			/>
 			<MyPostsContainer />
 		</div>

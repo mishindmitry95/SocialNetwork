@@ -1,5 +1,6 @@
 import React from "react";
 import Styles from "./ProfileInfo.module.css";
+import ProfileStatus from "./ProfileStatus/ProfileStatus";
 
 const ProfileInfo = (props) => {
 	const defaultPhoto = 'https://www.workinghprs.com/sites/all/themes/jollyany/demos/no-avatar.jpg';
@@ -18,6 +19,10 @@ const ProfileInfo = (props) => {
 			</div>
 			<div className={Styles.contentContainer}>
 				<div className={Styles.fullName}>{props.fullName}</div>
+				<ProfileStatus
+					updateStatus={props.updateStatus}
+					status={props.status}
+				/>
 			</div>
 		</div>
 	);

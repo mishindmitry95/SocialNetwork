@@ -12,6 +12,8 @@ export const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
 export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 export const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA';
 export const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS';
+export const GET_STATUS = 'GET_STATUS';
+export const UPDATE_STATUS = 'UPDATE_STATUS';
 
 
 //action creators
@@ -104,5 +106,19 @@ export const toggleFollowingProgress = (isFetching, userId) => {
 		type: TOGGLE_FOLLOWING_PROGRESS,
 		isFetching,
 		userId,
+	}
+}
+
+export const getStatus = (status) => {
+	return {
+		type: GET_STATUS,
+		status
+	}
+}
+
+export const updateStatus = (id) => {
+	return {
+		type: UPDATE_STATUS,
+		id
 	}
 }
