@@ -8,32 +8,14 @@ export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const SET_USERS_NUMBER = 'SET_USERS_NUMBER';
 export const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
 export const SET_USER_PROFILE = 'SET_USER_PROFILE';
-export const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT';
-export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT';
 export const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA';
 export const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS';
 export const GET_STATUS = 'GET_STATUS';
-export const UPDATE_STATUS = 'UPDATE_STATUS';
-
 
 //action creators
 export const addPost = text => {
 	return {
 		type: ADD_POST,
-		text
-	}
-}
-
-export const updateNewPostText = text => {
-	return {
-		type: UPDATE_NEW_POST_TEXT,
-		text
-	}
-}
-
-export const updateNewMessageText = text => {
-	return {
-		type: UPDATE_NEW_MESSAGE_TEXT,
 		text
 	}
 }
@@ -113,12 +95,5 @@ export const getStatus = (status) => {
 	return {
 		type: GET_STATUS,
 		status
-	}
-}
-
-export const updateStatus = (id) => {
-	return {
-		type: UPDATE_STATUS,
-		id
 	}
 }

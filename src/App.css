@@ -9,7 +9,8 @@
 
 .main-content {
 	display: grid;
-	grid-template-columns: 2fr 8fr;
+    position: relative;
+    grid-template-columns: 2fr 8fr;
 	grid-template-areas:
 	"sidebar pb";
 	grid-column-gap: 10px;
@@ -27,6 +28,33 @@
 .textarea {
 	display: block;
 	margin-bottom: 3px;
-	border: 1px solid #d3d9de;
+	border: 1px solid rgba(215, 216, 219, 1);
 	box-sizing: border-box;
+    outline: 0;
+}
+
+.textarea:focus {
+    border: 1px solid rgba(215, 216, 219, .5);
+}
+
+.textarea:focus::placeholder {
+    opacity: 0.5;
+}
+
+.input {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid rgba(215, 216, 219, 1);
+    box-sizing: border-box;
+    outline: 0;
+}
+
+.input:focus {
+    border: 1px solid rgba(215, 216, 219, .5);
+}
+
+.input:focus::placeholder {
+    opacity: 0.5;
 }

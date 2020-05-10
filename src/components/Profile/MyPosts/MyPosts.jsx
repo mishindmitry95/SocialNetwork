@@ -1,6 +1,6 @@
 import React from 'react';
 import Post from './Post/Post'
-import AddPost from "../../../containers/AddPost/AddPost";
+import AddPostForm from "../../forms/AddPostForm/AddPostForm";
 
 const MyPosts = (props) => {
 	const postElements = props.posts.map(p => {
@@ -13,16 +13,15 @@ const MyPosts = (props) => {
 			/>
 		);
 	})
+	const addPostHandle = (values) => {
+		props.addPost(values.postText);
+	}
 
 	return (
 		<div>
 			<h2>My posts</h2>
 			<div>
-				<AddPost
-					onAddPost={props.addPost}
-					onUpdateNewPostText={props.updateNewPostText}
-					newPostText={props.newPostText}
-				/>
+				<AddPostForm onSubmit={addPostHandle}/>
 			</div>
 			{ postElements }
 		</div>

@@ -12,8 +12,6 @@ const Dialogs = (props) => {
 			<MessagesList
 				messages={ props.messages }
 				onSendMessage={ props.sendMessage }
-				onUpdateNewMessageText={ props.updateNewMessageText }
-				newMessageText={ props.newMessageText }
 			/>
 		</div>
 	);

@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import {toggleFetching, setUserProfile, getStatus} from "../../actions/actions";
+import { toggleFetching, setUserProfile, getStatus } from "../../actions/actions";
 import Profile from "../../components/Profile/Profile";
 import { withRouter } from "react-router-dom";
 import { profileAPI } from "../../api/api";
@@ -66,5 +66,5 @@ const updateUserStatus = (status) => (dispatch) => {
 export default compose(
     connect(mapStateToProps, { getUserProfile, updateUserStatus, getUserStatus }),
     withRouter,
-    // withAuthRedirect
+    withAuthRedirect
 )(ProfileContainer)
