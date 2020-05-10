@@ -1,7 +1,7 @@
 import React from "react";
 import LoginForm from "../forms/LoginForm/LoginForm";
 
-const Login = props => {
+const Login = () => {
 	const submitHandle = (values) => {
 		console.log(values);
 	}

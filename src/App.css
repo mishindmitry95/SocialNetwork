@@ -58,3 +58,15 @@
 .input:focus::placeholder {
     opacity: 0.5;
 }
+
+.control_error {
+    border: 1px solid red;
+}
+
+.text_theme_error {
+    display: block;
+    color: red;
+    font-size: 11px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
