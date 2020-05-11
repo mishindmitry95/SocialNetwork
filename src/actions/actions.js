@@ -76,10 +76,15 @@ export const setUserProfile = (profile) => {
 	}
 }
 
-export const setAuthUserData = (data) => {
+export const setAuthUserData = (userId, email, login, isAuth) => {
 	return {
 		type: SET_AUTH_USER_DATA,
-		data
+		payload: {
+			userId,
+			email,
+			login,
+			isAuth
+		}
 	}
 }
 

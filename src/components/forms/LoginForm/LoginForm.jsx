@@ -3,20 +3,19 @@ import Button from '../../UI/Button/Button';
 import React from 'react';
 import Styles from './LoginForm.module.css'
 import Input from "../../UI/Input/Input";
-import { maxLengthCreator, required } from "../../../Utils/Utils";
+import { required } from "../../../Utils/Utils";
 
 let LoginForm = props => {
 	const { handleSubmit } = props;
-	const maxLength15 = maxLengthCreator(15);
 	return (
 		<form onSubmit={ handleSubmit } className={ Styles.formContainer }>
 			<div>
 				<Field
-					name='login'
-					placeholder='Login'
-					component={ Input }yar
+					name='email'
+					placeholder='email'
+					component={ Input }
 					type='text'
-					validate={ [required, maxLength15] }
+					validate={ [required] }
 				/>
 			</div>
 			<div>

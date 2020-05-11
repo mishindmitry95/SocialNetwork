@@ -1,6 +1,8 @@
 import React from "react";
 import Styles from './Header.module.css'
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import Button from "../UI/Button/Button";
+import Spacer from "../UI/Spacer/Spacer";
 
 const Header = (props) => {
 	return (
@@ -13,7 +15,16 @@ const Header = (props) => {
 				<div className={Styles.authContainer}>
 					{
 						props.isAuth
-							? props.login
+							?
+								<div>
+									{ props.login }
+									<Spacer width='5'/>
+									<Button
+										caption='Logout'
+										onClick={props.logout}
+										theme='danger'
+									/>
+								</div>
 							: <NavLink to='/login' className={Styles.link}>Log in</NavLink>
 					}
 				</div>
