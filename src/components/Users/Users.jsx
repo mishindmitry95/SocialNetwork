@@ -1,8 +1,8 @@
 import React from "react";
-import {User} from "./User/User";
+import { User } from "./User/User";
 import Button from "../UI/Button/Button";
 import Styles from './Users.module.css'
-import {Page} from "../../containers/Page/Page";
+import { Page } from "../../containers/Page/Page";
 
 export const Users = (props) => {
 	const userElements = props.users.map(user => {

@@ -7,7 +7,7 @@ const Input = ({input, meta, placeholder, ...props}) => {
 		<div>
 			<input
 				{...input}
-				placeholder={ !hasError && placeholder }
+				placeholder={ hasError ? null : placeholder }
 				className={`input ${ hasError && `control_error` }`}
 				{...props}
 			/>

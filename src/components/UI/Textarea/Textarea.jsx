@@ -7,7 +7,7 @@ const Textarea = ({textarea, meta, placeholder, ...props}) => {
 		<div>
 			<textarea
 				{...textarea}
-				placeholder={ !hasError && placeholder }
+				placeholder={ hasError ? null : placeholder }
 				className={`textarea ${ hasError && `control_error` }`}
 				{...props}
 			/>

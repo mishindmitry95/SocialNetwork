@@ -2,7 +2,7 @@ import React from "react";
 import LoginForm from "../forms/LoginForm/LoginForm";
 import { connect } from "react-redux";
 import { login } from "../../reducers/authReducer";
-import Redirect from "react-router-dom/es/Redirect";
+import { Redirect } from "react-router-dom";
 
 const Login = (props) => {
 	const submitHandle = (values) => {
@@ -18,13 +18,14 @@ const Login = (props) => {
 
     return (
         <>
-			<LoginForm onSubmit={submitHandle}/>
+			<LoginForm onSubmit={submitHandle} errorText={props.errorText}/>
 		</>
     );
 }
 
 const mapStateToProps = state => ({
-	isAuth: state.auth.isAuth
+	isAuth: state.auth.isAuth,
+	errorText: state.auth.errorText
 })
 
 export default connect(mapStateToProps,{ login })(Login);

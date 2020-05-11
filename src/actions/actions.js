@@ -11,6 +11,7 @@ export const SET_USER_PROFILE = 'SET_USER_PROFILE';
 export const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA';
 export const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS';
 export const GET_STATUS = 'GET_STATUS';
+export const SET_ERROR_TEXT = 'SET_ERROR_TEXT';
 
 //action creators
 export const addPost = text => {
@@ -100,5 +101,12 @@ export const getStatus = (status) => {
 	return {
 		type: GET_STATUS,
 		status
+	}
+}
+
+export const setErrorText = (errorText) => {
+	return {
+		type: SET_ERROR_TEXT,
+		errorText
 	}
 }

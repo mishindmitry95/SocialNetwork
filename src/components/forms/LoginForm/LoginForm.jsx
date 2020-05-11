@@ -4,6 +4,7 @@ import React from 'react';
 import Styles from './LoginForm.module.css'
 import Input from "../../UI/Input/Input";
 import { required } from "../../../Utils/Utils";
+import SubmitFormError from "../../UI/SubmitFormError/SubmitFormError";
 
 let LoginForm = props => {
 	const { handleSubmit } = props;
@@ -12,7 +13,7 @@ let LoginForm = props => {
 			<div>
 				<Field
 					name='email'
-					placeholder='email'
+					placeholder='Email'
 					component={ Input }
 					type='text'
 					validate={ [required] }
@@ -36,6 +37,7 @@ let LoginForm = props => {
 				/>
 				<label htmlFor='rememberMe' >Remember me</label>
 			</div>
+			{ props.errorText && <SubmitFormError errorText={ props.errorText } />}
 			<div>
 				<Button
 					caption='Log in'
