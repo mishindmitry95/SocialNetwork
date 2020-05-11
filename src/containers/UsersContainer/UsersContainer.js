@@ -1,16 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-import {
-	follow,
-	setCurrentPage,
-	setUsers,
-	setUsersNumber,
-	toggleFetching,
-	toggleFollowingProgress, unfollow,
-} from "../../actions/actions";
 import { Users } from "../../components/Users/Users";
-import { userAPI } from "../../api/api";
 import Preloader from "../../components/UI/Preloader/Preloader";
+import { followUnfollow, getUsers } from "../../reducers/usersPageReducer";
 
 class UsersContainer extends React.Component {
 	componentDidMount() {
@@ -59,33 +51,5 @@ const mapStateToProps = state => ({
 	isFetching: state.usersPage.isFetching,
 	followingInProgress: state.usersPage.followingInProgress
 })
-
-const getUsers = (page, count) => (dispatch) => {
-	dispatch(toggleFetching(true));
-	userAPI.getUsers(page, count)
-		.then(data => {
-			dispatch(setUsers(data.items));
-			dispatch(setUsersNumber(data.totalCount));
-			dispatch(setCurrentPage(page));
-			dispatch(toggleFetching(false));
-		}).catch(e => console.error(e));
-}
-
-const followUnfollow = (id, followed) => (dispatch) => {
-	dispatch(toggleFollowingProgress(true, id));
-	if (followed) {
-		return userAPI.userUnfollow(id)
-			.then(() => {
-				dispatch(unfollow(id));
-				dispatch(toggleFollowingProgress(false, id));
-			}).catch(e => console.error(e));
-	}
-	return userAPI.userFollow(id)
-		.then(() => {
-			dispatch(follow(id));
-			dispatch(toggleFollowingProgress(false, id));
-		}).catch(e => console.error(e));
-}
-
 
 export default connect(mapStateToProps, { getUsers, followUnfollow })(UsersContainer);

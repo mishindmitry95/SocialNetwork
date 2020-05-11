@@ -1,4 +1,11 @@
-import { SEND_MESSAGE } from '../actions/actions';
+const SEND_MESSAGE = 'SEND_MESSAGE';
+
+export const sendMessage = text => {
+	return {
+		type: SEND_MESSAGE,
+		text
+	}
+}
 
 const initialState = {
 	dialogs: [],

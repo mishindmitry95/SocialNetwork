@@ -1,6 +1,28 @@
-import { SET_AUTH_USER_DATA, SET_ERROR_TEXT, setAuthUserData, setErrorText } from '../actions/actions';
 import { authAPI } from "../api/api";
 import { stopSubmit } from "redux-form";
+
+const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA';
+const SET_ERROR_TEXT = 'SET_ERROR_TEXT';
+
+
+export const setAuthUserData = (userId, email, login, isAuth) => {
+	return {
+		type: SET_AUTH_USER_DATA,
+		payload: {
+			userId,
+			email,
+			login,
+			isAuth
+		}
+	}
+}
+
+export const setErrorText = (errorText) => {
+	return {
+		type: SET_ERROR_TEXT,
+		errorText
+	}
+}
 
 const initialState = {
     email: null,

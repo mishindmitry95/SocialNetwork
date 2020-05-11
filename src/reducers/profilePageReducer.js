@@ -1,9 +1,38 @@
-import {
-	ADD_POST,
-	GET_STATUS,
-	SET_USER_PROFILE,
-	TOGGLE_FETCHING
-} from '../actions/actions';
+import {profileAPI} from "../api/api";
+
+const ADD_POST = 'ADD_POST';
+const GET_STATUS = 'GET_STATUS';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
+
+export const addPost = text => {
+	return {
+		type: ADD_POST,
+		text
+	}
+}
+
+export const getStatus = (status) => {
+	return {
+		type: GET_STATUS,
+		status
+	}
+}
+
+export const setUserProfile = (profile) => {
+	return {
+		type: SET_USER_PROFILE,
+		profile
+	}
+}
+
+export const toggleFetching = (isFetching) => {
+	return {
+		type: TOGGLE_FETCHING,
+		isFetching
+	}
+}
+
 
 const initialState = {
 	posts: [
@@ -59,4 +88,33 @@ export const profilePageReducer = (state = initialState, action) => {
 		default:
 			return state
 	}
+}
+
+
+export const getUserProfile = (id) => (dispatch) => {
+	dispatch(toggleFetching(true));
+	profileAPI.getProfile(id)
+		.then(data => {
+			dispatch(setUserProfile(data));
+			dispatch(toggleFetching(false));
+		})
+		.catch(e => console.error(e));
+}
+
+export const getUserStatus = (id) => (dispatch) => {
+	profileAPI.getStatus(id)
+		.then(data => {
+			dispatch(getStatus(data))
+		})
+		.catch(e => console.error(e));
+}
+
+export const updateUserStatus = (status) => (dispatch) => {
+	profileAPI.updateStatus(status)
+		.then(data => {
+			if (data.resultCode === 0) {
+				dispatch(getStatus(status))
+			}
+		})
+		.catch(e => console.error(e));
 }
