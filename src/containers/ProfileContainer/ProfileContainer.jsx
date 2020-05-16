@@ -4,8 +4,14 @@ import Profile from "../../components/Profile/Profile";
 import { withRouter } from "react-router-dom";
 import Preloader from "../../components/UI/Preloader/Preloader";
 import { compose } from "redux";
-import { withAuthRedirect } from "../../reducers/withAuthRedirect";
-import { getUserProfile, getUserStatus, updateUserStatus } from "../../reducers/profilePageReducer";
+import { withAuthRedirect } from "../../redux/reducers/withAuthRedirect";
+import { getUserProfile, getUserStatus, updateUserStatus } from "../../redux/reducers/profilePageReducer";
+import {
+	getAuthorizedUserId,
+	getIsFetching,
+	getProfile,
+	getStatusSelector
+} from "../../redux/selectors/profile-selectors";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
@@ -29,10 +35,10 @@ class ProfileContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    profile: state.profilePage.profile,
-    isFetching: state.profilePage.isFetching,
-	status: state.profilePage.status,
-	authorizedUserId: state.auth.userId
+    profile: getProfile(state),
+    isFetching: getIsFetching(state),
+	status: getStatusSelector(state),
+	authorizedUserId: getAuthorizedUserId(state)
 })
 
 export default compose(

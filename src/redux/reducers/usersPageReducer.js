@@ -1,4 +1,4 @@
-import { userAPI } from "../api/api";
+import { userAPI } from "../../api/api";
 import { toggleFetching } from "./profilePageReducer";
 
 const FOLLOW = 'FOLLOW';

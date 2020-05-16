@@ -1,7 +1,7 @@
 import React from "react";
 import LoginForm from "../forms/LoginForm/LoginForm";
 import { connect } from "react-redux";
-import { login } from "../../reducers/authReducer";
+import { login } from "../../redux/reducers/authReducer";
 import { Redirect } from "react-router-dom";
 
 const Login = (props) => {
