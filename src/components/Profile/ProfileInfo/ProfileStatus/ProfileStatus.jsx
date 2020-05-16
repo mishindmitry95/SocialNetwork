@@ -1,58 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import Styles from "./ProfileStatus.module.css";
 
-class ProfileStatus extends React.Component {
-	constructor(props) {
-		super(props);
+const ProfileStatus = props => {
+	const [editMode, setEditMode] = useState(false);
+	const [status, setStatus] = useState(props.status);
 
-		this.state = {
-			editMode: false,
-			status: this.props.status
-		}
-		this.toggleEditMode = this.toggleEditMode.bind(this);
-		this.updateStatus = this.updateStatus.bind(this);
+	const toggleEditMode = () => {
+		setEditMode(!editMode);
 	}
 
-componentDidUpdate(prevProps, prevState, snapshot) {
-	if (prevProps.status !== this.props.status) {
-		this.updateStatus(this.props.status);
-	}
-}
-
-	toggleEditMode() {
-		this.setState({
-			editMode: !this.state.editMode
-		})
+	const updateStatus = value => {
+		setStatus(value);
 	}
 
-	updateStatus(value) {
-		this.setState({
-			status: value
-		})
-	}
-
-	render() {
-		return (
-			<>
-				{
-					this.state.editMode
-						? <input
-							className={Styles.input}
-							onBlur={() => {
-								this.toggleEditMode();
-								this.props.updateStatus(this.state.status)}
-							}
-							autoFocus
-							onChange={e => this.updateStatus(e.currentTarget.value)}
-							value={this.state.status}
-							/>
-						: <div
-							onClick={this.toggleEditMode}
-							> {this.state.status}</div>
-				}
-			</>
-		);
-	}
+	return (
+		<>
+			{
+				editMode
+					? <input
+						className={ Styles.input }
+						onBlur={ () => {
+							toggleEditMode();
+							props.updateStatus(status);
+						} }
+						autoFocus
+						onChange={ e => updateStatus(e.currentTarget.value) }
+						value={ status }
+						/>
+					: <div
+						onClick={ toggleEditMode }
+						> { status }</div>
+			}
+		</>
+	);
 }
 
 export default ProfileStatus;
