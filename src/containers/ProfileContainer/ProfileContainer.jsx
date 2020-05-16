@@ -9,12 +9,12 @@ import { getUserProfile, getUserStatus, updateUserStatus } from "../../reducers/
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        let profileId = this.props.match.params.userId;
-        if (!profileId) {
-            profileId = 7295;
+        let userId = this.props.match.params.userId;
+        if (!userId) {
+			userId = this.props.authorizedUserId ? this.props.authorizedUserId : this.props.history.push("/login");
         }
-        this.props.getUserProfile(profileId);
-        this.props.getUserStatus(profileId);
+        this.props.getUserProfile(userId);
+        this.props.getUserStatus(userId);
     }
 
     render() {
@@ -31,7 +31,8 @@ class ProfileContainer extends React.Component {
 const mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
     isFetching: state.profilePage.isFetching,
-	status: state.profilePage.status
+	status: state.profilePage.status,
+	authorizedUserId: state.auth.userId
 })
 
 export default compose(
