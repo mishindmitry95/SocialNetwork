@@ -2,7 +2,7 @@ import React from 'react';
 import Post from './Post/Post'
 import AddPostForm from "../../forms/AddPostForm/AddPostForm";
 
-const MyPosts = (props) => {
+const MyPosts = React.memo((props) => {
 	const postElements = props.posts.map(p => {
 		return (
 			<Post
@@ -26,6 +26,6 @@ const MyPosts = (props) => {
 			{ postElements }
 		</div>
 	);
-}
+});
 
 export default MyPosts;
