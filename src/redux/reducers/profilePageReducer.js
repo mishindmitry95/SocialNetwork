@@ -91,30 +91,33 @@ export const profilePageReducer = (state = initialState, action) => {
 }
 
 
-export const getUserProfile = (id) => (dispatch) => {
+export const getUserProfile = (id) => async (dispatch) => {
 	dispatch(toggleFetching(true));
-	profileAPI.getProfile(id)
-		.then(data => {
-			dispatch(setUserProfile(data));
-			dispatch(toggleFetching(false));
-		})
-		.catch(e => console.error(e));
+	const response = await profileAPI.getProfile(id);
+	try {
+		dispatch(setUserProfile(response.data));
+		dispatch(toggleFetching(false));
+	} catch (e) {
+		console.error(e)
+	}
 }
 
-export const getUserStatus = (id) => (dispatch) => {
-	profileAPI.getStatus(id)
-		.then(data => {
-			dispatch(getStatus(data))
-		})
-		.catch(e => console.error(e));
+export const getUserStatus = (id) => async (dispatch) => {
+	const response = await profileAPI.getStatus(id);
+	try {
+		dispatch(getStatus(response.data))
+	} catch (e) {
+		console.error(e)
+	}
 }
 
-export const updateUserStatus = (status) => (dispatch) => {
-	profileAPI.updateStatus(status)
-		.then(data => {
-			if (data.resultCode === 0) {
-				dispatch(getStatus(status))
-			}
-		})
-		.catch(e => console.error(e));
+export const updateUserStatus = (status) => async (dispatch) => {
+	const response = await profileAPI.updateStatus(status);
+	try {
+		if (response.data.resultCode === 0) {
+			dispatch(getStatus(status))
+		}
+	} catch (e) {
+		console.error(e)
+	}
 }

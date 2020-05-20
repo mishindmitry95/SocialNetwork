@@ -129,29 +129,36 @@ export const usersPageReducer = (state = initialState, action) => {
 	}
 }
 
-export const getUsers = (page, count) => (dispatch) => {
+export const getUsers = (page, count) => async (dispatch) => {
 	dispatch(toggleFetching(true));
-	userAPI.getUsers(page, count)
-		.then(data => {
-			dispatch(setUsers(data.items));
-			dispatch(setUsersNumber(data.totalCount));
-			dispatch(setCurrentPage(page));
-			dispatch(toggleFetching(false));
-		}).catch(e => console.error(e));
+	const response = await userAPI.getUsers(page, count);
+	try {
+		dispatch(setUsers(response.data.items));
+		dispatch(setUsersNumber(response.data.totalCount));
+		dispatch(setCurrentPage(response.page));
+		dispatch(toggleFetching(false));
+	} catch (e) {
+		console.error(e)
+	}
 }
 
-export const followUnfollow = (id, followed) => (dispatch) => {
+export const followUnfollow = (id, followed) => async (dispatch) => {
 	dispatch(toggleFollowingProgress(true, id));
 	if (followed) {
-		return userAPI.userUnfollow(id)
-			.then(() => {
-				dispatch(unfollow(id));
-				dispatch(toggleFollowingProgress(false, id));
-			}).catch(e => console.error(e));
-	}
-	return userAPI.userFollow(id)
-		.then(() => {
+		await userAPI.userUnfollow(id);
+		try {
+			dispatch(unfollow(id));
+			dispatch(toggleFollowingProgress(false, id));
+		} catch (e) {
+			console.error(e)
+		}
+	} else {
+		try {
+			await userAPI.userFollow(id);
 			dispatch(follow(id));
 			dispatch(toggleFollowingProgress(false, id));
-		}).catch(e => console.error(e));
+		} catch (e) {
+			console.error(e)
+		}
+	}
 }
