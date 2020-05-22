@@ -1,3 +1,9 @@
+.PaginatorContainer {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
 .item {
 	color: #285473;
 	cursor: pointer;

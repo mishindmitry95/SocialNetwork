@@ -56,7 +56,7 @@ export const toggleFollowingProgress = (isFetching, userId) => {
 const initialState = {
 	users: [],
 	currentPage: 1,
-	count: 5,
+	count: 10,
 	usersNumber: 0,
 	isFetching: true,
 	followingInProgress: []
@@ -135,7 +135,7 @@ export const getUsers = (page, count) => async (dispatch) => {
 	try {
 		dispatch(setUsers(response.data.items));
 		dispatch(setUsersNumber(response.data.totalCount));
-		dispatch(setCurrentPage(response.page));
+		dispatch(setCurrentPage(page));
 		dispatch(toggleFetching(false));
 	} catch (e) {
 		console.error(e)

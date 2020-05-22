@@ -17,15 +17,9 @@ class UsersContainer extends React.Component {
 		this.props.getUsers(this.props.currentPage, this.props.count);
 	}
 
-	get pages() {
-		// const pagesCount = Math.ceil((this.props.usersNumber / this.props.count));
-		let pagesArray = [];
-		//TODO т.к страниц 3000, пока ограничим 5, потом сделать нормально, и добавить,
-		// чтобы при пустом массиве, ничего не отображалось
-		for ( let i=1; i <= 5; i++ ) {
-			pagesArray.push(i);
-		}
-		return pagesArray
+	onPageChanged = (pageNumber) => {
+		const { count } = this.props;
+		this.props.getUsers(pageNumber, count);
 	}
 
 	render() {
@@ -38,14 +32,13 @@ class UsersContainer extends React.Component {
 				users={this.props.users}
 				followUnfollow={this.props.followUnfollow}
 				isFetching={this.props.isFetching}
-				pages={this.pages}
 				toggleFetching={this.props.toggleFetching}
 				setCurrentPage={this.props.setCurrentPage}
 				setUsers={this.props.setUsers}
 				setUsersNumber={this.props.setUsersNumber}
 				followingInProgress={this.props.followingInProgress}
 				toggleFollowingProgress={this.props.toggleFollowingProgress}
-				getUsers={this.props.getUsers}
+				onPageChanged={this.onPageChanged}
 			/>
 		);
 	}

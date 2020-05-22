@@ -2,7 +2,7 @@ import React from "react";
 import { User } from "./User/User";
 import Button from "../UI/Button/Button";
 import Styles from './Users.module.css'
-import { Page } from "../../containers/Page/Page";
+import Paginator from "../UI/Paginator/Paginator";
 
 export const Users = (props) => {
 	const userElements = props.users.map(user => {
@@ -20,23 +20,14 @@ export const Users = (props) => {
 		);
 	});
 
-	const pageElements = props.pages.map(page => {
-		return (
-			<Page
-				key={page}
-				page={page}
-				getUsers={props.getUsers}
-				selected={ page === props.currentPage }
-				count={props.count}
-			/>
-		)
-	});
-
 	return (
 		<div className={Styles.usersContainer}>
-			<div className={Styles.PagesContainer}>
-				{ pageElements }
-			</div>
+			<Paginator
+				totalItemsCount={props.usersNumber}
+				pageSize={props.count}
+				currentPage={props.currentPage}
+				onPageChanged={props.onPageChanged}
+			/>
 			<div>
 				{ userElements }
 			</div>
