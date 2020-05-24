@@ -2,8 +2,6 @@ import React from 'react';
 import { Route, withRouter, Redirect } from 'react-router-dom'
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import DialogsContainer from "./containers/DialogsContainer/DialogsContainer";
-import UsersContainer from "./containers/UsersContainer/UsersContainer";
 import ProfileContainer from "./containers/ProfileContainer/ProfileContainer";
 import HeaderContainer from "./containers/HeaderContainer/HeaderContainer";
 import Login from "./components/Login/Login";
@@ -11,6 +9,9 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { initialize } from "./redux/reducers/appReducer";
 import Preloader from "./components/UI/Preloader/Preloader";
+import { withSuspense } from "./hoc/withSuspense";
+const DialogsContainer = React.lazy(() => import('./containers/DialogsContainer/DialogsContainer'));
+const UsersContainer = React.lazy(() => import('./containers/UsersContainer/UsersContainer'));
 
 class App extends React.Component {
 	componentDidMount() {
@@ -32,8 +33,8 @@ class App extends React.Component {
 					<div className='page_body'>
 						<Route exact path='/' render={ () => <Redirect to={ "/profile" } /> } />
 						<Route path='/profile/:userId?' component={ ProfileContainer }/>
-						<Route path='/dialogs' component={ DialogsContainer }/>
-						<Route path='/users' component={ UsersContainer }/>
+						<Route path='/dialogs' component={ withSuspense(DialogsContainer) }/>
+						<Route path='/users' component={ withSuspense(UsersContainer) }/>
 						<Route path='/login' component={ Login }/>
 					</div>
 				</div>

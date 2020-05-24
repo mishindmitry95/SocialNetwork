@@ -20,7 +20,15 @@ const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, porti
 		>
 			{
 				portionNumber > 1 &&
-				<button onClick={() => { setPortionNumber(portionNumber - 1) }}>PREV</button>
+				<button
+					className={Styles.arrow + ' ' + Styles.left}
+					onClick={() => { setPortionNumber(portionNumber - 1) }}
+				>
+					<svg width="10px" height="10px" viewBox="0 0 50 80" >
+    					<polyline fill="none" stroke="#285473" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" points="
+						45.63,75.8 0.375,38.087 45.63,0.375 "/>
+ 					 </svg>
+				</button>
 			}
 			{
 				pages
@@ -41,7 +49,16 @@ const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, porti
 			}
 			{
 				portionCount > portionNumber &&
-			<button onClick={() => { setPortionNumber(portionNumber + 1) }}>NEXT</button>
+				<button
+					className={Styles.arrow + ' ' + Styles.right}
+					onClick={() => { setPortionNumber(portionNumber + 1) }}
+				>
+					<svg xmlns="http://www.w3.org/2000/svg" width="10px"
+						 height="10px" viewBox="0 0 50 80" >
+    					<polyline fill="none" stroke="#285473" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" points="
+						0.375,0.375 45.63,38.087 0.375,75.8 "/>
+  					</svg>
+				</button>
 			}
 		</div>
 	);

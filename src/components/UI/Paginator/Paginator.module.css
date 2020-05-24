@@ -20,3 +20,33 @@
 	background: #e1e5eb;
 	border-radius: 3px;
 }
+
+.arrow {
+    border: 0;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+}
+.left:hover polyline,
+.left:focus polyline {
+    stroke-width: 3;
+}
+
+.left:active polyline {
+    stroke-width: 6;
+    transition: all 100ms ease-in-out;
+}
+
+.right:hover polyline,
+.right:focus polyline {
+    stroke-width: 3;
+}
+
+.right:active polyline {
+    stroke-width: 6;
+    transition: all 100ms ease-in-out;
+}
+
+polyline {
+    transition: all 250ms ease-in-out;
+}
