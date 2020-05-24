@@ -4,6 +4,7 @@ const ADD_POST = 'ADD_POST';
 const GET_STATUS = 'GET_STATUS';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
+const UPLOAD_NEW_PHOTO = 'UPLOAD_NEW_PHOTO';
 
 export const addPost = text => {
 	return {
@@ -30,6 +31,13 @@ export const toggleFetching = (isFetching) => {
 	return {
 		type: TOGGLE_FETCHING,
 		isFetching
+	}
+}
+
+export const uploadNewPhoto = (photos) => {
+	return {
+		type: UPLOAD_NEW_PHOTO,
+		photos
 	}
 }
 
@@ -85,6 +93,12 @@ export const profilePageReducer = (state = initialState, action) => {
 				status: action.status
 			}
 
+		case UPLOAD_NEW_PHOTO:
+			return {
+				...state,
+				profile: {...state.profile, photos: action.photos}
+			}
+
 		default:
 			return state
 	}
@@ -116,6 +130,17 @@ export const updateUserStatus = (status) => async (dispatch) => {
 	try {
 		if (response.data.resultCode === 0) {
 			dispatch(getStatus(status))
+		}
+	} catch (e) {
+		console.error(e)
+	}
+}
+
+export const savePhoto = (photos) => async(dispatch) => {
+	const response = await profileAPI.uploadNewPhoto(photos);
+	try {
+		if (response.data.resultCode === 0) {
+			dispatch(uploadNewPhoto(response.data.data.photos))
 		}
 	} catch (e) {
 		console.error(e)
