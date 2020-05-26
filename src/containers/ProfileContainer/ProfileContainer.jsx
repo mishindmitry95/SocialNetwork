@@ -5,7 +5,13 @@ import { withRouter } from "react-router-dom";
 import Preloader from "../../components/UI/Preloader/Preloader";
 import { compose } from "redux";
 import { withAuthRedirect } from "../../redux/reducers/withAuthRedirect";
-import {getUserProfile, getUserStatus, savePhoto, updateUserStatus} from "../../redux/reducers/profilePageReducer";
+import {
+	getUserProfile,
+	getUserStatus,
+	savePhoto,
+	saveProfile,
+	updateUserStatus
+} from "../../redux/reducers/profilePageReducer";
 import {
 	getAuthorizedUserId,
 	getIsFetching,
@@ -52,7 +58,7 @@ const mapStateToProps = (state) => ({
 })
 
 export default compose(
-    connect(mapStateToProps, { getUserProfile, updateUserStatus, getUserStatus, savePhoto }),
+    connect(mapStateToProps, { getUserProfile, updateUserStatus, getUserStatus, savePhoto, saveProfile }),
     withRouter,
     withAuthRedirect
 )(ProfileContainer)

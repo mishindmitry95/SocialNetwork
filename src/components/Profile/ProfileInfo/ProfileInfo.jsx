@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import Styles from "./ProfileInfo.module.css";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import { ProfileData } from "./ProfileData/ProfileData";
+import ProfileDataForm from "./ProfileDataForm/ProfileDataForm";
 
 const ProfileInfo = (props) => {
 	const defaultPhoto = 'https://www.workinghprs.com/sites/all/themes/jollyany/demos/no-avatar.jpg';
+	const [editMode, setEditMode] = useState(false);
 
 	const onUploadPhoto = (event) => {
 		if (event.target.files.length > 0) {
 			props.savePhoto(event.target.files[0])
 		}
+	}
+
+	const doEditMode = () => {
+		setEditMode(true);
+	}
+
+	const onSubmit = (formData) => {
+		props.saveProfile(formData).then(
+			() => {
+				setEditMode(false);
+			}
+		)
 	}
 
 	return (
@@ -41,6 +56,27 @@ const ProfileInfo = (props) => {
 					updateStatus={props.updateStatus}
 					status={props.status}
 				/>
+				{
+					editMode
+						? <ProfileDataForm
+							contacts={props.contacts}
+							onSubmit={onSubmit}
+							initialValues={{
+								fullName: props.fullName,
+								lookingForAJobDescription: props.lookingForAJobDescription,
+								lookingForAJob: props.lookingForAJob,
+								contacts: props.contacts
+							}}
+						/>
+						: <ProfileData
+							aboutMe={props.aboutMe}
+							lookingForAJob={props.lookingForAJob}
+							lookingForAJobDescription={props.lookingForAJobDescription}
+							contacts={props.contacts}
+							isOwner={props.isOwner}
+							doEditMode={doEditMode}
+						/>
+				}
 			</div>
 		</div>
 	);

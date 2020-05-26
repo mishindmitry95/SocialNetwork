@@ -37,7 +37,7 @@ let LoginForm = props => {
 				/>
 				<label htmlFor='rememberMe' >Remember me</label>
 			</div>
-			{ props.errorText && <SubmitFormError errorText={ props.errorText } />}
+			{ props.error && <SubmitFormError errorText={ props.error } />}
 			<div>
 				<Button
 					caption='Log in'
