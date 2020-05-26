@@ -63,6 +63,7 @@ const ProfileInfo = (props) => {
 							onSubmit={onSubmit}
 							initialValues={{
 								fullName: props.fullName,
+								aboutMe: props.aboutMe,
 								lookingForAJobDescription: props.lookingForAJobDescription,
 								lookingForAJob: props.lookingForAJob,
 								contacts: props.contacts

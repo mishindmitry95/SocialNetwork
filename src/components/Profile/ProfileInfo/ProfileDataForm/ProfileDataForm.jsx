@@ -7,7 +7,6 @@ import Textarea from "../../../UI/Textarea/Textarea";
 import SubmitFormError from "../../../UI/SubmitFormError/SubmitFormError";
 
 let ProfileDataForm = (props) => {
-	console.log(props.error);
 	return <form className={Styles.FormContainer} onSubmit={props.handleSubmit}>
 		<div>
 			<label htmlFor='fullName' style={{fontSize: '13px'}}><b>Full Name:</b></label>
@@ -65,7 +64,7 @@ const ContactFormField = ({ title }) => {
 	return <div>
 		<label htmlFor={title} style={{fontSize: '13px'}}><b>{title + ':'}</b></label>
 		<Field
-			name={ title }
+			name={ 'contacts.' + title }
 			component={ Input }
 			type='input'
 			id={ title }
