@@ -6,8 +6,8 @@ import { Redirect } from "react-router-dom";
 
 const Login = (props) => {
 	const submitHandle = (values) => {
-		const { email, password, rememberMe } = values;
-		props.login(email, password, rememberMe);
+		const { email, password, rememberMe, captcha } = values;
+		props.login(email, password, rememberMe, captcha);
 	}
 
 	if (props.isAuth) {
@@ -18,14 +18,15 @@ const Login = (props) => {
 
     return (
         <>
-			<LoginForm onSubmit={submitHandle} errorText={props.errorText}/>
+			<LoginForm onSubmit={submitHandle} errorText={props.errorText} captchaUrl={props.captchaUrl}/>
 		</>
     );
 }
 
 const mapStateToProps = state => ({
 	isAuth: state.auth.isAuth,
-	errorText: state.auth.errorText
+	errorText: state.auth.errorText,
+	captchaUrl: state.auth.captchaUrl
 })
 
 export default connect(mapStateToProps,{ login })(Login);

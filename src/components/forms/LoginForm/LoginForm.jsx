@@ -37,7 +37,16 @@ let LoginForm = props => {
 				/>
 				<label htmlFor='rememberMe' >Remember me</label>
 			</div>
-			{ props.error && <SubmitFormError errorText={ props.error } />}
+			{ props.captchaUrl && <img src={ props.captchaUrl } alt='captcha' /> }
+			{ props.errorText && <SubmitFormError errorText={ props.errorText } /> }
+			{
+				props.captchaUrl &&
+				<Field
+					name='captcha'
+					component={ Input }
+					validate={ [required] }
+				/>
+			}
 			<div>
 				<Button
 					caption='Log in'

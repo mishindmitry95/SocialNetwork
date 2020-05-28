@@ -1,8 +1,9 @@
-import { authAPI } from "../../api/api";
+import {authAPI, securityAPI} from "../../api/api";
 import { stopSubmit } from "redux-form";
 
 const SET_AUTH_USER_DATA = 'SET_AUTH_USER_DATA';
 const SET_ERROR_TEXT = 'SET_ERROR_TEXT';
+const GET_CAPTCHA_URL_SUCCES = 'GET_CAPTCHA_URL_SUCCES'
 
 
 export const setAuthUserData = (userId, email, login, isAuth) => {
@@ -14,6 +15,13 @@ export const setAuthUserData = (userId, email, login, isAuth) => {
 			login,
 			isAuth
 		}
+	}
+}
+
+export const getCaptchaUrlSuccess = (captchaUrl) => {
+	return {
+		type: GET_CAPTCHA_URL_SUCCES,
+		payload: { captchaUrl }
 	}
 }
 
@@ -29,12 +37,14 @@ const initialState = {
     login: null,
     id: null,
     isAuth: false,
-	errorText: ''
+	errorText: '',
+	captchaUrl: null
 }
 
 export const authReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_AUTH_USER_DATA:
+		case GET_CAPTCHA_URL_SUCCES:
             return {
                 ...state,
                 ...action.payload
@@ -63,14 +73,26 @@ export const getAuthUserData = () => async (dispatch) => {
 	}
 }
 
-export const login = (email, password, rememberMe) => async (dispatch) => {
-	const response = await authAPI.login(email, password, rememberMe);
+export const getCaptchaUrl = () => async (dispatch) => {
+	const response = await securityAPI.getCaptchUrl();
 	try {
-		if (response.data.data.resultCode === 0) {
+		dispatch(getCaptchaUrlSuccess(response.data.url))
+	} catch (e) {
+		console.error(e);
+	}
+}
+
+export const login = (email, password, rememberMe, captcha) => async (dispatch) => {
+	const response = await authAPI.login(email, password, rememberMe, captcha);
+	try {
+		if (response.data.resultCode === 0) {
 			dispatch(getAuthUserData());
 		} else {
-			if (response.data.data.messages.length) {
-				dispatch(setErrorText(response.data.data.messages[0]))
+			if (response.data.resultCode === 10) {
+				dispatch(getCaptchaUrl());
+			}
+			if (response.data.messages.length) {
+				dispatch(setErrorText(response.data.messages[0]))
 			}
 			dispatch(stopSubmit('login'));
 		}
