@@ -3,8 +3,19 @@ import { User } from "./User/User";
 import Button from "../UI/Button/Button";
 import Styles from './Users.module.css'
 import Paginator from "../UI/Paginator/Paginator";
+import { UserType } from "../../types/types";
 
-export const Users = (props) => {
+type UsersProps = {
+	usersNumber: number,
+	count: number,
+	currentPage: number
+	users: Array<UserType>
+	followUnfollow: (id: number, followed: boolean) => void
+	followingInProgress: Array<number>
+	onPageChanged: (p: number) => void
+}
+
+export const Users: React.FC<UsersProps> = (props: UsersProps ) => {
 	const userElements = props.users.map(user => {
 		return (
 			<User

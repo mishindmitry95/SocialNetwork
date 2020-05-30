@@ -11,13 +11,31 @@ import {
 	getUsersSelector,
 	getIsFetching
 } from "../../redux/selectors/users-selectors";
+import { UserType } from "../../types/types";
+import { AppStateType } from "../../index";
 
-class UsersContainer extends React.Component {
+type UsersContainerProps = MapDispatchPropsType & MapStatePropsType
+
+type MapDispatchPropsType = {
+	getUsers: (page: number, count: number) => void
+	followUnfollow: (id: number, followed: boolean) => void
+}
+
+type MapStatePropsType = {
+	users: Array<UserType>
+	count: number
+	currentPage: number
+	usersNumber: number
+	isFetching: boolean
+	followingInProgress: Array<number>
+}
+
+class UsersContainer extends React.Component<UsersContainerProps> {
 	componentDidMount() {
 		this.props.getUsers(this.props.currentPage, this.props.count);
 	}
 
-	onPageChanged = (pageNumber) => {
+	onPageChanged = (pageNumber: number) => {
 		const { count } = this.props;
 		this.props.getUsers(pageNumber, count);
 	}
@@ -31,20 +49,14 @@ class UsersContainer extends React.Component {
 				currentPage={this.props.currentPage}
 				users={this.props.users}
 				followUnfollow={this.props.followUnfollow}
-				isFetching={this.props.isFetching}
-				toggleFetching={this.props.toggleFetching}
-				setCurrentPage={this.props.setCurrentPage}
-				setUsers={this.props.setUsers}
-				setUsersNumber={this.props.setUsersNumber}
 				followingInProgress={this.props.followingInProgress}
-				toggleFollowingProgress={this.props.toggleFollowingProgress}
 				onPageChanged={this.onPageChanged}
 			/>
 		);
 	}
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
 	users: getUsersSelector(state),
 	count: getCount(state),
 	currentPage: getCurrentPage(state),
@@ -53,4 +65,4 @@ const mapStateToProps = state => ({
 	followingInProgress: getFollowingInProgress(state)
 })
 
-export default connect(mapStateToProps, { getUsers, followUnfollow })(UsersContainer);
+export default connect<MapStatePropsType,MapDispatchPropsType,{},AppStateType>(mapStateToProps, { getUsers, followUnfollow })(UsersContainer)
