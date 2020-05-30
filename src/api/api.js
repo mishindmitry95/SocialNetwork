@@ -18,9 +18,9 @@ export const profileAPI = {
 	getProfile:(id) => instance.get(`profile/${id}`),
 	getStatus:(id) => instance.get(`profile/status/${id}`),
 	updateStatus:(status) => instance.put('profile/status', { status }),
-	uploadNewPhoto:(photos) => {
+	savePhoto:(photo) => {
 		const formData = new FormData();
-		formData.append("image", photos);
+		formData.append("image", photo);
 		return instance.put(`profile/photo`, formData, {
 			headers: {
 				'Content-Type': 'multipart/form-data'

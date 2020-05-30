@@ -4,7 +4,7 @@ import Profile from "../../components/Profile/Profile";
 import { withRouter } from "react-router-dom";
 import Preloader from "../../components/UI/Preloader/Preloader";
 import { compose } from "redux";
-import { withAuthRedirect } from "../../redux/reducers/withAuthRedirect";
+import { withAuthRedirect } from "../../hoc/withAuthRedirect";
 import {
 	getUserProfile,
 	getUserStatus,
