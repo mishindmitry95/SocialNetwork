@@ -1,6 +1,6 @@
 import { profileAPI } from "../../api/api";
 import { stopSubmit } from "redux-form";
-import {PhotosType, PostType, ProfileType} from "../../types/types";
+import { PhotosType, PostType, ProfileType } from "../../types/types";
 
 const ADD_POST = 'socialNetwork/profilePage/ADD_POST';
 const GET_STATUS = 'socialNetwork/profilePage/GET_STATUS';

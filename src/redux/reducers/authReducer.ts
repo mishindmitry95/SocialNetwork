@@ -5,32 +5,10 @@ const SET_AUTH_USER_DATA = 'socialNetwork/auth/SET_AUTH_USER_DATA';
 const SET_ERROR_TEXT = 'socialNetwork/auth/SET_ERROR_TEXT';
 const GET_CAPTCHA_URL_SUCCESS = 'socialNetwork/auth/GET_CAPTCHA_URL_SUCCESS';
 
-type setAuthUserDataPayloadType = {
-	userId: number | null,
-	email: string | null,
-	login: string | null,
-	isAuth: boolean
-}
-
-type setAuthUserDataActionType = {
-	type: typeof SET_AUTH_USER_DATA,
-	payload: setAuthUserDataPayloadType
-}
-
-
-// export type InitialStateType = {
-// 	email: string | null,
-// 	login: string | null,
-// 	id: number | null,
-// 	isAuth: boolean,
-// 	errorText: string,
-// 	captchaUrl: string | null
-// }
-
 const initialState = {
 	email: null as string | null,
 	login: null as string | null,
-	id: null as number | null,
+	userId: null as number | null,
 	isAuth: false,
 	errorText: '' as string | null,
 	captchaUrl: null as string | null
@@ -48,11 +26,6 @@ export const setAuthUserData = (userId: number | null, email: string | null, log
 			isAuth
 		}
 	}
-}
-
-type getCaptchaUrlSuccessActionType = {
-	type: typeof GET_CAPTCHA_URL_SUCCESS,
-	payload: { captchaUrl: string }
 }
 
 export const getCaptchaUrlSuccess = (captchaUrl: string): getCaptchaUrlSuccessActionType => {
@@ -86,9 +59,9 @@ export const authReducer = (state = initialState, action: any): InitialStateType
 
 export const getAuthUserData = () => async (dispatch: any) => {
 	try {
-		const meData = await authAPI.me();
-		if (meData.data.resultCode === 0) {
-			const { id, email, login } = meData.data.data;
+		const response = await authAPI.me();
+		if (response.data.resultCode === 0) {
+			const { id, email, login } = response.data.data;
 			dispatch(setAuthUserData(id, email, login, true));
 		}
 	} catch (e) {
@@ -133,4 +106,21 @@ export const logout = () => async (dispatch: any) => {
 	} catch(e) {
 		console.error(e)
 	}
+}
+
+type setAuthUserDataPayloadType = {
+	userId: number | null,
+	email: string | null,
+	login: string | null,
+	isAuth: boolean
+}
+
+type setAuthUserDataActionType = {
+	type: typeof SET_AUTH_USER_DATA,
+	payload: setAuthUserDataPayloadType
+}
+
+type getCaptchaUrlSuccessActionType = {
+	type: typeof GET_CAPTCHA_URL_SUCCESS,
+	payload: { captchaUrl: string }
 }

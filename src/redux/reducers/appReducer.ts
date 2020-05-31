@@ -2,12 +2,6 @@ import { getAuthUserData } from "./authReducer";
 
 const INITIALIZED_SUCCESS = 'socialNetwork/app/INITIALIZED_SUCCESS';
 
-export type initializedSuccessActionType = {
-	type: typeof INITIALIZED_SUCCESS
-}
-
-export const initializedSuccess = ():initializedSuccessActionType => ({type: INITIALIZED_SUCCESS});
-
 export type InitialStateType = {
 	isInitialized: boolean
 }
@@ -15,6 +9,8 @@ export type InitialStateType = {
 const initialState: InitialStateType = {
 	isInitialized: false
 }
+
+export const initializedSuccess = ():initializedSuccessActionType => ({type: INITIALIZED_SUCCESS});
 
 export const appReducer = (state = initialState, action: any): InitialStateType => {
 	switch (action.type) {
@@ -37,4 +33,8 @@ export const initialize = () => (dispatch: any) => {
 			dispatch(initializedSuccess());
 		})
 		.catch(e => console.error(e));
+}
+
+export type initializedSuccessActionType = {
+	type: typeof INITIALIZED_SUCCESS
 }
