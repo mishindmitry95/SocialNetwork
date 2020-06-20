@@ -1,3 +1,9 @@
+import { ActionsTypes } from "../../index";
+import { DialogType, MessageType } from "../../types/types";
+
+export type InitialStateType = typeof initialState
+type ActionType = ActionsTypes<typeof actions>;
+
 const SEND_MESSAGE = 'socialNetwork/dialogsPage/SEND_MESSAGE';
 
 const initialState = {
@@ -11,9 +17,7 @@ const initialState = {
 	] as Array<MessageType>,
 }
 
-export type InitialStateType = typeof initialState
-
-export const dialogsPageReducer = (state = initialState, action: any): InitialStateType => {
+export const dialogsPageReducer = (state = initialState, action: ActionType): InitialStateType => {
 	switch (action.type) {
 		case SEND_MESSAGE:
 			return {
@@ -29,20 +33,6 @@ export const dialogsPageReducer = (state = initialState, action: any): InitialSt
 	}
 }
 
-type SendMessageActionCreatorType = {
-	type: typeof SEND_MESSAGE,
-	text: string
+export const actions = {
+	sendMessage: (text: string) => ({type: SEND_MESSAGE, text})
 }
-
-type DialogType = {
-	id: number,
-	name: string
-}
-
-type MessageType = {
-	id: number,
-	message: string
-}
-
-
-export const sendMessage = (text: string): SendMessageActionCreatorType => ({type: SEND_MESSAGE, text})

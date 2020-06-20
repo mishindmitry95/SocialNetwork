@@ -1,18 +1,21 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom'
-import { createStore, applyMiddleware, compose } from 'redux'
+import {createStore, applyMiddleware, compose, Action} from 'redux'
 import { Provider } from "react-redux";
 import { rootReducer, RootReducerType } from './redux/reducers/rootReducer'
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import thunkMiddleware from 'redux-thunk';
+import thunkMiddleware, {ThunkAction} from 'redux-thunk';
 
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReducer,composeEnhancers(applyMiddleware(thunkMiddleware)));
 export type AppStateType = ReturnType<RootReducerType>
+
+export type ActionsTypes<T> = T extends { [key: string]: (...args: any[]) => infer U } ? U : never
+export type CommonThunkType<A extends Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
 
 ReactDOM.render(
   <BrowserRouter>

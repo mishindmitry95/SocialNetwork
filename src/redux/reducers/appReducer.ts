@@ -1,18 +1,20 @@
 import { getAuthUserData } from "./authReducer";
+import {ActionsTypes} from "../../index";
+
+export type InitialStateType = typeof initialState
+type ActionType = ActionsTypes<typeof actions>
 
 const INITIALIZED_SUCCESS = 'socialNetwork/app/INITIALIZED_SUCCESS';
 
-export type InitialStateType = {
-	isInitialized: boolean
-}
-
-const initialState: InitialStateType = {
+const initialState = {
 	isInitialized: false
 }
 
-export const initializedSuccess = ():initializedSuccessActionType => ({type: INITIALIZED_SUCCESS});
+export const actions = {
+	initializedSuccess: () => ({type: INITIALIZED_SUCCESS})
+}
 
-export const appReducer = (state = initialState, action: any): InitialStateType => {
+export const appReducer = (state = initialState, action: ActionType ): InitialStateType => {
 	switch (action.type) {
 		case INITIALIZED_SUCCESS:
 			return {
@@ -30,11 +32,7 @@ export const initialize = () => (dispatch: any) => {
 
 	Promise.all([promise])
 		.then(() => {
-			dispatch(initializedSuccess());
+			dispatch(actions.initializedSuccess());
 		})
 		.catch(e => console.error(e));
-}
-
-export type initializedSuccessActionType = {
-	type: typeof INITIALIZED_SUCCESS
 }
