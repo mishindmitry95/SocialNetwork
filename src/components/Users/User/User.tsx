@@ -7,7 +7,7 @@ type TUser = {
 	id: number
 	name: string
 	status: string
-	photo: string
+	photo: string | null
 	followed: boolean
 	key: number
 	followUnfollow: (id: number, followed: boolean) => void

@@ -1,15 +1,15 @@
-import React from "react";
+import React from 'react';
 import {Field, InjectedFormProps, reduxForm} from 'redux-form';
-import Button from "../../UI/Button/Button";
+import Button from '../../UI/Button/Button';
 
 export type TextType = {
 	messageText: string
-}
+};
 
 const SendMessageForm: React.FC<InjectedFormProps<TextType, {}> & {}> = (props) => {
-	const { handleSubmit } = props;
+	const {handleSubmit} = props;
 	return (
-		<form onSubmit={ handleSubmit }>
+		<form onSubmit={handleSubmit}>
 			<div>
 				<Field
 					name='messageText'
@@ -27,6 +27,6 @@ const SendMessageForm: React.FC<InjectedFormProps<TextType, {}> & {}> = (props) 
 			</div>
 		</form>
 	);
-}
+};
 
-export default reduxForm<TextType, {}>({form: 'SendMessageForm'})(SendMessageForm);;
+export default reduxForm<TextType, {}>({form: 'SendMessageForm'})(SendMessageForm);

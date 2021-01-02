@@ -11,7 +11,7 @@ type TProfileInfoProps = {
 	fullName: string
 	lookingForAJob: boolean
 	lookingForAJobDescription: string
-	photo: string
+	photo: string | null
 	userId: number
 	isOwner: boolean
 	updateStatus: (status: string) => void

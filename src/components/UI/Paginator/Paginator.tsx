@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState} from 'react';
 import Styles from './Paginator.module.css'
 
 type PaginatorProps = {
@@ -7,12 +7,17 @@ type PaginatorProps = {
 	currentPage: number,
 	onPageChanged: (p: number) => void,
 	portionSize?: number
-}
+};
 
-const Paginator: React.FC<PaginatorProps> = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => {
+const Paginator: React.FC<PaginatorProps> = ({totalItemsCount,
+											 pageSize,
+											 currentPage,
+											 onPageChanged,
+											 portionSize = 10
+											 }) => {
 	const pagesCount = Math.ceil(totalItemsCount / pageSize);
 
-	let pages: Array<number> = [];
+	const pages: Array<number> = [];
 	for (let i = 1; i <= pagesCount; i++) {
 		pages.push(i);
 	}
@@ -30,46 +35,52 @@ const Paginator: React.FC<PaginatorProps> = ({totalItemsCount, pageSize, current
 				portionNumber > 1 &&
 				<button
 					className={Styles.arrow + ' ' + Styles.left}
-					onClick={() => { setPortionNumber(portionNumber - 1) }}
+					onClick={() => {
+						setPortionNumber(portionNumber - 1)
+					}}
 				>
-					<svg width="10px" height="10px" viewBox="0 0 50 80" >
-    					<polyline fill="none" stroke="#285473" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" points="
+					<svg width="10px" height="10px" viewBox="0 0 50 80">
+						<polyline fill="none" stroke="#285473" strokeWidth="5" strokeLinecap="round"
+								  strokeLinejoin="round" points="
 						45.63,75.8 0.375,38.087 45.63,0.375 "/>
- 					 </svg>
+					</svg>
 				</button>
 			}
 			{
 				pages
-				.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
-				.map(p => {
-					return (
-						<span
-							className={`${Styles.item} ${currentPage === p ? Styles.selected : ''}`}
-							key={p}
-							onClick={(e) => {
-								onPageChanged(p);
-							}}
-						>
+					.filter(p => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
+					.map(p => {
+						return (
+							<span
+								className={`${Styles.item} ${currentPage === p ? Styles.selected : ''}`}
+								key={p}
+								onClick={(e) => {
+									onPageChanged(p);
+								}}
+							>
 							{p}
 						</span>
-					)
-				})
+						)
+					})
 			}
 			{
 				portionCount > portionNumber &&
 				<button
 					className={Styles.arrow + ' ' + Styles.right}
-					onClick={() => { setPortionNumber(portionNumber + 1) }}
+					onClick={() => {
+						setPortionNumber(portionNumber + 1)
+					}}
 				>
 					<svg xmlns="http://www.w3.org/2000/svg" width="10px"
-						 height="10px" viewBox="0 0 50 80" >
-    					<polyline fill="none" stroke="#285473" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" points="
+						 height="10px" viewBox="0 0 50 80">
+						<polyline fill="none" stroke="#285473" strokeWidth="5" strokeLinecap="round"
+								  strokeLinejoin="round" points="
 						0.375,0.375 45.63,38.087 0.375,75.8 "/>
-  					</svg>
+					</svg>
 				</button>
 			}
 		</div>
 	);
-}
+};
 
 export default Paginator;

@@ -3,7 +3,7 @@ export type PostType = {
 	avatar: string,
 	text: string,
 	likes: number
-}
+};
 
 export type ContactsType = {
 	github: string,
@@ -14,12 +14,12 @@ export type ContactsType = {
 	website: string,
 	youtube: string,
 	mainLink: string
-}
+};
 
 export type PhotosType = {
-	small: string,
-	large: string
-}
+	small: string | null,
+	large: string | null
+};
 
 export type ProfileType = {
 	userId: number,
@@ -29,7 +29,7 @@ export type ProfileType = {
 	contacts: ContactsType,
 	photos: PhotosType,
 	aboutMe: string
-}
+};
 
 export type UserType = {
 	id: number,
@@ -37,14 +37,14 @@ export type UserType = {
 	status: string,
 	photos: PhotosType,
 	followed: boolean
-}
+};
 
 export type DialogType = {
 	id: number,
 	name: string
-}
+};
 
 export type MessageType = {
 	id: number,
 	message: string
-}
+};

@@ -2,10 +2,10 @@ import React from "react";
 import Styles from './Post.module.css'
 
 type TPostProps = {
-	avatar: string
-	text: string
+	avatar: string,
+	text: string,
 	likes: number
-}
+};
 
 const Post: React.FC<TPostProps> = (props) => {
 	return (
@@ -17,6 +17,6 @@ const Post: React.FC<TPostProps> = (props) => {
 			</div>
 		</div>
 	);
-}
+};
 
 export default Post;

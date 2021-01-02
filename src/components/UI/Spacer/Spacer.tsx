@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 type TSpacerProps = {
 	width: string
-}
+};
 
 const Spacer: React.FC<TSpacerProps> = (props) => {
 	return (
@@ -13,6 +13,6 @@ const Spacer: React.FC<TSpacerProps> = (props) => {
 			}}
 		/>
 	)
-}
+};
 
 export default Spacer;

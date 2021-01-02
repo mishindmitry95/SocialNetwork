@@ -1,10 +1,10 @@
-import React from "react";
+import React from 'react';
 import './Button.css'
 
 type TButtonProps = {
-	theme: string
-	disabled?: boolean
-	onClick?: () => void
+	theme: string,
+	disabled?: boolean,
+	onClick?: () => void,
 	caption: string
 }
 
@@ -18,6 +18,6 @@ const Button: React.FC<TButtonProps> = (props) => {
 			{props.caption}
 		</button>
 	);
-}
+};
 
 export default Button;

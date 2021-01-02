@@ -1,9 +1,9 @@
-import React from "react";
-import { User } from "./User/User";
-import Button from "../UI/Button/Button";
+import React from 'react';
+import {User} from './User/User';
+import Button from '../UI/Button/Button';
 import Styles from './Users.module.css'
-import Paginator from "../UI/Paginator/Paginator";
-import { UserType } from "../../types/types";
+import Paginator from '../UI/Paginator/Paginator';
+import {UserType} from '../../types/types';
 
 type UsersProps = {
 	usersNumber: number,
@@ -15,7 +15,7 @@ type UsersProps = {
 	onPageChanged: (p: number) => void
 }
 
-export const Users: React.FC<UsersProps> = (props: UsersProps ) => {
+export const Users: React.FC<UsersProps> = (props: UsersProps) => {
 	const userElements = props.users.map(user => {
 		return (
 			<User
@@ -40,7 +40,7 @@ export const Users: React.FC<UsersProps> = (props: UsersProps ) => {
 				onPageChanged={props.onPageChanged}
 			/>
 			<div>
-				{ userElements }
+				{userElements}
 			</div>
 			<div className={Styles.buttonContainer}>
 				<Button

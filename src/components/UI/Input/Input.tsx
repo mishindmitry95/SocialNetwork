@@ -1,14 +1,14 @@
-import React from "react";
-import { WrappedFieldProps } from "redux-form";
+import React from 'react';
+import {WrappedFieldProps} from 'redux-form';
 
 const Input: React.FC<WrappedFieldProps> = (props) => {
-	const { input, meta, ...restProps } = props;
+	const {input, meta, ...restProps} = props;
 	const hasError = meta.touched && meta.error;
 	return (
 		<div>
 			<input
 				{...input}
-				className={`input ${ hasError && `control_error` }`}
+				className={`input ${hasError && `control_error`}`}
 				{...restProps}
 			/>
 			{
@@ -17,6 +17,6 @@ const Input: React.FC<WrappedFieldProps> = (props) => {
 			}
 		</div>
 	)
-}
+};
 
 export default Input;

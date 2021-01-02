@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 import Styles from './Header.module.css'
-import { NavLink } from "react-router-dom";
-import Button from "../UI/Button/Button";
-import Spacer from "../UI/Spacer/Spacer";
+import {NavLink} from 'react-router-dom';
+import Button from '../UI/Button/Button';
+import Spacer from '../UI/Spacer/Spacer';
 
 type THeaderProps = {
-	login: string | null
-	isAuth: boolean
+	login: string | null,
+	isAuth: boolean,
 	logout: () => void
-}
+};
 
 const Header: React.FC<THeaderProps> = (props) => {
 	return (
@@ -23,7 +23,7 @@ const Header: React.FC<THeaderProps> = (props) => {
 						props.isAuth
 							?
 							<div>
-								{ props.login }
+								{props.login}
 								<Spacer width='5'/>
 								<Button
 									caption='Logout'
@@ -37,6 +37,6 @@ const Header: React.FC<THeaderProps> = (props) => {
 			</div>
 		</div>
 	);
-}
+};
 
 export default Header;

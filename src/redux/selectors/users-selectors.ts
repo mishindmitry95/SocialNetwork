@@ -1,4 +1,4 @@
-import { AppStateType } from "../../index";
+import {AppStateType} from '../../index';
 
 export const getFollowingInProgress = (state: AppStateType) => state.usersPage.followingInProgress;
 export const getUsersSelector = (state: AppStateType) => state.usersPage.users;

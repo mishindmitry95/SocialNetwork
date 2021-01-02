@@ -1,27 +1,28 @@
 import React from 'react';
 import Post from './Post/Post'
-import AddPostForm, {AddPostFormValuesType} from "../../forms/AddPostForm/AddPostForm";
-import { PostType } from "../../../types/types";
+import AddPostForm, {AddPostFormValuesType} from '../../forms/AddPostForm/AddPostForm';
+import {PostType} from '../../../types/types';
 
 type PropsType = {
-	posts: Array<PostType>
+	posts: Array<PostType>,
 	addPost: (text: string) => void
-}
+};
 
 const MyPosts: React.FC<PropsType> = React.memo((props) => {
 	const postElements = props.posts.map(p => {
 		return (
 			<Post
-				avatar={ p.avatar }
-				text= {p.text }
-				likes={ p.likes }
-				key={ p.id }
+				avatar={p.avatar}
+				text={p.text}
+				likes={p.likes}
+				key={p.id}
 			/>
 		);
-	})
+	});
+
 	const addPostHandle = (values: AddPostFormValuesType) => {
 		props.addPost(values.postText);
-	}
+	};
 
 	return (
 		<div>
@@ -29,7 +30,7 @@ const MyPosts: React.FC<PropsType> = React.memo((props) => {
 			<div>
 				<AddPostForm onSubmit={addPostHandle}/>
 			</div>
-			{ postElements }
+			{postElements}
 		</div>
 	);
 });

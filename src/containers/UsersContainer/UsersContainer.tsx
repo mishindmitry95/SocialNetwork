@@ -1,8 +1,8 @@
-import React from "react";
-import { connect } from "react-redux";
-import { Users } from "../../components/Users/Users";
-import Preloader from "../../components/UI/Preloader/Preloader";
-import { followUnfollow, getUsers } from "../../redux/reducers/usersPageReducer";
+import React from 'react';
+import {connect} from 'react-redux';
+import {Users} from '../../components/Users/Users';
+import Preloader from '../../components/UI/Preloader/Preloader';
+import {followUnfollow, getUsers} from '../../redux/reducers/usersPageReducer';
 import {
 	getCount,
 	getCurrentPage,
@@ -10,25 +10,25 @@ import {
 	getUsersNumber,
 	getUsersSelector,
 	getIsFetching
-} from "../../redux/selectors/users-selectors";
-import { UserType } from "../../types/types";
-import { AppStateType } from "../../index";
+} from '../../redux/selectors/users-selectors';
+import {UserType} from '../../types/types';
+import {AppStateType} from '../../index';
 
-type UsersContainerProps = MapDispatchPropsType & MapStatePropsType
+type UsersContainerProps = MapDispatchPropsType & MapStatePropsType;
 
 type MapDispatchPropsType = {
-	getUsers: (page: number, count: number) => void
+	getUsers: (page: number, count: number) => void,
 	followUnfollow: (id: number, followed: boolean) => void
-}
+};
 
 type MapStatePropsType = {
-	users: Array<UserType>
-	count: number
-	currentPage: number
-	usersNumber: number
-	isFetching: boolean
+	users: Array<UserType>,
+	count: number,
+	currentPage: number,
+	usersNumber: number,
+	isFetching: boolean,
 	followingInProgress: Array<number>
-}
+};
 
 class UsersContainer extends React.Component<UsersContainerProps> {
 	componentDidMount() {
@@ -36,12 +36,12 @@ class UsersContainer extends React.Component<UsersContainerProps> {
 	}
 
 	onPageChanged = (pageNumber: number) => {
-		const { count } = this.props;
+		const {count} = this.props;
 		this.props.getUsers(pageNumber, count);
-	}
+	};
 
 	render() {
-		if (this.props.isFetching) return <Preloader />
+		if (this.props.isFetching) return <Preloader/>
 		return (
 			<Users
 				usersNumber={this.props.usersNumber}
@@ -63,6 +63,9 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
 	usersNumber: getUsersNumber(state),
 	isFetching: getIsFetching(state),
 	followingInProgress: getFollowingInProgress(state)
-})
+});
 
-export default connect<MapStatePropsType,MapDispatchPropsType,{},AppStateType>(mapStateToProps, { getUsers, followUnfollow })(UsersContainer)
+export default connect<MapStatePropsType, MapDispatchPropsType, {}, AppStateType>(mapStateToProps, {
+	getUsers,
+	followUnfollow
+})(UsersContainer);

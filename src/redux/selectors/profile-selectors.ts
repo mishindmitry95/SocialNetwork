@@ -1,4 +1,4 @@
-import { AppStateType } from "../../index";
+import {AppStateType} from '../../index';
 
 export const getProfile = (state: AppStateType) => state.profilePage.profile;
 export const getIsFetching = (state: AppStateType) => state.profilePage.isFetching;

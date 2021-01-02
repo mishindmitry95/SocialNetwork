@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 type TSubmitFormErrorProps = {
 	errorText: string
-}
+};
 
 const SubmitFormError: React.FC<TSubmitFormErrorProps> = (props) => {
 	return (
@@ -18,10 +18,10 @@ const SubmitFormError: React.FC<TSubmitFormErrorProps> = (props) => {
 					fontSize: '11px'
 				}}
 			>
-				{ props.errorText }
+				{props.errorText}
 			</div>
 		</div>
 	)
-}
+};
 
 export default SubmitFormError;

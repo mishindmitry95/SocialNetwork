@@ -1,15 +1,15 @@
-import React from "react";
-import {WrappedFieldProps} from "redux-form";
+import React from 'react';
+import {WrappedFieldProps} from 'redux-form';
 
 
-const Textarea: React.FC<WrappedFieldProps > = (props) => {
-	const { input, meta, ...restProps } = props;
+const Textarea: React.FC<WrappedFieldProps> = (props) => {
+	const {input, meta, ...restProps} = props;
 	const hasError = meta.touched && meta.error;
 	return (
 		<div>
 			<textarea
 				{...input}
-				className={`textarea ${ hasError && `control_error` }`}
+				className={`textarea ${hasError && `control_error`}`}
 				{...restProps}
 			/>
 			{
@@ -18,6 +18,6 @@ const Textarea: React.FC<WrappedFieldProps > = (props) => {
 			}
 		</div>
 	)
-}
+};
 
 export default Textarea;

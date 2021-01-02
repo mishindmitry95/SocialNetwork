@@ -3,7 +3,7 @@ import { ActionsTypes, CommonThunkType } from "../../index";
 import { Dispatch } from "redux";
 import { userAPI } from "../../api/user-api";
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 type UsersPageActionsType = ActionsTypes<typeof actions>
 type ThunkType = CommonThunkType<UsersPageActionsType>
 
@@ -15,7 +15,7 @@ const SET_USERS_NUMBER = 'socialNetwork/usersPage/SET_USERS_NUMBER';
 const TOGGLE_IS_FETCHING = 'socialNetwork/usersPage/TOGGLE_FETCHING';
 const TOGGLE_FOLLOWING_PROGRESS = 'socialNetwork/usersPage/TOGGLE_FOLLOWING_PROGRESS';
 
-const initialState = {
+const initialState  = {
 	users: [] as Array<UserType>,
 	currentPage: 1,
 	count: 10,

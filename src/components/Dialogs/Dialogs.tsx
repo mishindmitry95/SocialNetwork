@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import Styles from './Dialogs.module.css'
-import DialogsList from "./DialogsList/DialogsList";
-import MessagesList from "./MessagesList/MessagesList";
-import {DialogType, MessageType} from "../../types/types";
+import DialogsList from './DialogsList/DialogsList';
+import MessagesList from './MessagesList/MessagesList';
+import {DialogType, MessageType} from '../../types/types';
 
 type OwnPropsType = {
 	dialogs: Array<DialogType> | [],
@@ -14,14 +14,14 @@ const Dialogs: React.FC<OwnPropsType> = (props) => {
 	return (
 		<div className={Styles.ContentContainer}>
 			<DialogsList
-				dialogs={ props.dialogs }
+				dialogs={props.dialogs}
 			/>
 			<MessagesList
-				messages={ props.messages }
-				onSendMessage={ props.sendMessage }
+				messages={props.messages}
+				onSendMessage={props.sendMessage}
 			/>
 		</div>
 	);
-}
+};
 
 export default Dialogs;

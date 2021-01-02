@@ -1,9 +1,8 @@
-import React from "react";
+import React from 'react';
 import Styles from './Navbar.module.css'
-import {NavLink} from "react-router-dom";
+import {NavLink} from 'react-router-dom';
 
-type TNavbarProps = {
-}
+type TNavbarProps = {}
 
 const Navbar: React.FC<TNavbarProps> = () => {
 	return (
@@ -18,6 +17,6 @@ const Navbar: React.FC<TNavbarProps> = () => {
 			</nav>
 		</div>
 	);
-}
+};
 
 export default Navbar;
