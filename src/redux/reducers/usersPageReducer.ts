@@ -114,23 +114,28 @@ export const getUsers = (page: number, count: number): ThunkType => async (dispa
 	}
 }
 
-export const followUnfollow = (id: number, followed: boolean): ThunkType => async (dispatch: any) => {
+export const follow = (id: number): ThunkType => async (dispatch: any) => {
 	dispatch(actions.toggleFollowingProgress(true, id));
-	if (followed) {
-		try {
-			await userAPI.userUnfollow(id);
-			dispatch(actions.unfollowSuccess(id));
-			dispatch(actions.toggleFollowingProgress(false, id));
-		} catch (e) {
-			console.error(e)
-		}
-	} else {
-		try {
-			await userAPI.userFollow(id);
-			dispatch(actions.followSuccess(id));
-			dispatch(actions.toggleFollowingProgress(false, id));
-		} catch (e) {
-			console.error(e)
-		}
+
+	try {
+		await actions.followSuccess(id);
+		dispatch(actions.followSuccess(id));
+	} catch (e) {
+		console.error(e)
 	}
+
+	dispatch(actions.toggleFollowingProgress(false, id));
+}
+
+export const unfollow = (id: number): ThunkType => async (dispatch: any) => {
+	dispatch(actions.toggleFollowingProgress(true, id));
+
+	try {
+		await userAPI.userUnfollow(id);
+		dispatch(actions.unfollowSuccess(id));
+	} catch (e) {
+		console.error(e)
+	}
+
+	dispatch(actions.toggleFollowingProgress(false, id));
 }

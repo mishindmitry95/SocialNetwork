@@ -8,10 +8,11 @@ import {UserType} from '../../types/types';
 type UsersProps = {
 	usersNumber: number,
 	count: number,
-	currentPage: number
-	users: Array<UserType>
-	followUnfollow: (id: number, followed: boolean) => void
-	followingInProgress: Array<number>
+	currentPage: number,
+	users: Array<UserType>,
+	follow: (id: number) => void,
+	unfollow: (id: number) => void,
+	followingInProgress: Array<number>,
 	onPageChanged: (p: number) => void
 }
 
@@ -25,7 +26,8 @@ export const Users: React.FC<UsersProps> = (props: UsersProps) => {
 				photo={user.photos.small}
 				followed={user.followed}
 				key={user.id}
-				followUnfollow={props.followUnfollow}
+				follow={props.follow}
+				unfollow={props.unfollow}
 				buttonDisable={props.followingInProgress.some(id => id === user.id)}
 			/>
 		);
