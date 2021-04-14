@@ -13,14 +13,14 @@ import {withSuspense} from './hoc/withSuspense';
 import {AppStateType} from './index';
 
 const DialogsContainer = React.lazy(() => import('./containers/DialogsContainer/DialogsContainer'));
-const UsersContainer = React.lazy(() => import('./containers/UsersContainer/UsersContainer'));
+const UsersPage = React.lazy(() => import('./containers/UsersPage/UsersPage'));
 
 type MapPropsType = ReturnType<typeof mapStateToProps>;
 type DispatchPropsType = {
 	initialize: () => void;
 };
 
-const SuspendedUsers = withSuspense(UsersContainer);
+const SuspendedUsers = withSuspense(UsersPage);
 const SuspendedDialogs = withSuspense(DialogsContainer);
 
 class App extends React.Component<MapPropsType & DispatchPropsType> {
