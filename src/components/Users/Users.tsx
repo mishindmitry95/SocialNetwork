@@ -4,6 +4,8 @@ import Button from '../UI/Button/Button';
 import Styles from './Users.module.css'
 import Paginator from '../UI/Paginator/Paginator';
 import {UserType} from '../../types/types';
+import { UsersSearchForm } from './UserSearchForm/UserSearchForm';
+import { FilterType } from '../../redux/reducers/usersPageReducer';
 
 type UsersProps = {
 	usersNumber: number,
@@ -14,6 +16,7 @@ type UsersProps = {
 	unfollow: (id: number) => void,
 	followingInProgress: Array<number>,
 	onPageChanged: (p: number) => void
+	onFilterChanged: (filter: FilterType) => void
 }
 
 export const Users: React.FC<UsersProps> = (props: UsersProps) => {
@@ -50,6 +53,9 @@ export const Users: React.FC<UsersProps> = (props: UsersProps) => {
 					theme='info'
 				/>
 			</div>
+			<UsersSearchForm
+				onChanged={ this.props.onFilterChanged }
+			/>
 		</div>
 	);
 }

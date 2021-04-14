@@ -3,13 +3,15 @@ import { ActionsTypes, CommonThunkType } from "../../index";
 import { Dispatch } from "redux";
 import { userAPI } from "../../api/user-api";
 
-export type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState;
+export type FilterType = typeof initialState.filter;
 type UsersPageActionsType = ActionsTypes<typeof actions>
-type ThunkType = CommonThunkType<UsersPageActionsType>
+type ThunkType = CommonThunkType<UsersPageActionsType>;
 
 const FOLLOW_SUCCESS = 'socialNetwork/usersPage/FOLLOW_SUCCESS';
 const UNFOLLOW_SUCCESS = 'socialNetwork/usersPage/UNFOLLOW_SUCCESS';
 const SET_CURRENT_PAGE = 'socialNetwork/usersPage/SET_CURRENT_PAGE';
+const SET_FILTER = 'socialNetwork/usersPage/SET_FILTER';
 const SET_USERS = 'socialNetwork/usersPage/SET_USERS';
 const SET_USERS_NUMBER = 'socialNetwork/usersPage/SET_USERS_NUMBER';
 const TOGGLE_IS_FETCHING = 'socialNetwork/usersPage/TOGGLE_FETCHING';
@@ -21,7 +23,11 @@ const initialState  = {
 	count: 10,
 	usersNumber: 0,
 	isFetching: true,
-	followingInProgress: [] as Array<number>
+	followingInProgress: [] as Array<number>,
+	filter: {
+		term: '',
+		friend: null
+	}
 }
 
 export const usersPageReducer = (state = initialState, action: UsersPageActionsType): InitialStateType => {
@@ -86,6 +92,12 @@ export const usersPageReducer = (state = initialState, action: UsersPageActionsT
 					: state.followingInProgress.filter(id => id !== action.userId)
 			}
 
+		case SET_FILTER:
+			return {
+				...state,
+				filter: action.payload
+			};
+
 		default:
 			return state
 	}
@@ -95,19 +107,21 @@ export const actions = {
 	followSuccess:(userId: number) => ({type: FOLLOW_SUCCESS, userId} as const),
 	unfollowSuccess:(userId: number) => ({type: UNFOLLOW_SUCCESS, userId} as const),
 	setCurrentPage:(currentPage: number) => ({type: SET_CURRENT_PAGE, currentPage} as const),
+	setFilter:(filter: FilterType) => ({type: SET_FILTER, payload: filter} as const),
 	setUsers:(users: Array<UserType>) => ({type: SET_USERS, users}) as const,
 	setUsersNumber: (usersNumber: number) => ({type: SET_USERS_NUMBER, usersNumber} as const),
 	toggleIsFetching: (isFetching: boolean) => ({type: TOGGLE_IS_FETCHING, isFetching} as const),
 	toggleFollowingProgress:(isFetching: boolean, userId: number) => ({type: TOGGLE_FOLLOWING_PROGRESS, isFetching, userId} as const),
 }
 
-export const getUsers = (page: number, count: number): ThunkType => async (dispatch: Dispatch<UsersPageActionsType>) => {
+export const getUsers = (page: number, count: number, filter: FilterType): ThunkType => async (dispatch: Dispatch<UsersPageActionsType>) => {
 	dispatch(actions.toggleIsFetching(true));
 	try {
-		const data = await userAPI.getUsers(page, count);
+		const data = await userAPI.getUsers(page, count, filter);
 		dispatch(actions.setUsers(data.items));
 		dispatch(actions.setUsersNumber(data.totalCount));
 		dispatch(actions.setCurrentPage(page));
+		dispatch(actions.setFilter(term));
 		dispatch(actions.toggleIsFetching(false));
 	} catch (e) {
 		console.error(e)

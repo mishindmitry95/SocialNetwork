@@ -6,3 +6,4 @@ export const getCount = (state: AppStateType) => state.usersPage.count;
 export const getCurrentPage = (state: AppStateType) => state.usersPage.currentPage;
 export const getUsersNumber = (state: AppStateType) => state.usersPage.usersNumber;
 export const getIsFetching = (state: AppStateType) => state.usersPage.isFetching;
+export const getUsersFilter = (state: AppStateType) => state.usersPage.filter;
